@@ -20,8 +20,6 @@ export const AddUserAction = (user: IUser): AppAction => ({
 
 })
 
-
-
 export const EditUserAction = (user: IUser): AppAction => ({
 
     type: EDIT_USER,
