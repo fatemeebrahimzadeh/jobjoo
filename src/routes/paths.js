@@ -14,6 +14,7 @@ export const PATH_AUTH = {
     register: path(ROOTS_AUTH, '/register'),
 };
 
+
 export const PATH_PAGE = {
     test : '/test',
     page404: '/404',

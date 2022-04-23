@@ -1,10 +1,19 @@
-import React from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
+import React, {lazy, Suspense} from 'react';
+import {Navigate, useLocation, useRoutes} from 'react-router-dom';
 
+const Loadable = (Component) => (props) => {
+
+    return (
+        <Suspense fallback={<p>loading...</p>}>
+            <Component {...props} />
+        </Suspense>
+    );
+};
 export default function Router() {
     return useRoutes([
-        {path: 'test',
-        element: <Test/>
+        {
+            path: 'test',
+            element: <Test/>
         },
         {
             path: 'auth',
@@ -21,8 +30,8 @@ export default function Router() {
                         <p>register</p>
                     ),
                 },
-                { path: 'login', element: <p>login</p> },
-                { path: 'register', element: <p>register</p> },
+                {path: 'login', element: <p>login</p>},
+                {path: 'register', element: <p>register</p>},
             ],
         },
 
@@ -31,27 +40,28 @@ export default function Router() {
             path: '*',
             element: <p>***</p>,
             children: [
-                { path: '404', element: <p>404</p> },
-                { path: '*', element: <Navigate to="/404" replace /> },
-                { path: 'test', element: <Test/> },
+                {path: '404', element: <p>404</p>},
+                {path: '*', element: <Navigate to="/404" replace/>},
+                {path: 'test', element: <Test/>},
             ],
         },
         {
             path: '/',
-            element:<p>///</p>,
+            element: <p>home</p>,
             children: [
-                { element: <p>home</p>, index: true }
+                {element: <p>home</p>, index: true}
             ],
         },
-        { path: '*', element: <Navigate to="/404" replace /> },
+        {path: '*', element: <Navigate to="/404" replace/>},
     ]);
 }
 // test
-const Test =()=>import('../components/test/Test');
+const Test = Loadable(lazy(() => import('../components/test/Test')));
+;
 
 // Authentication
-const Login = () => import('');
-const Register = () => import('');
+const Login = Loadable(lazy(() => import('../components/test/Test')));
+const Register = Loadable(lazy(() => import('../components/test/Test')));;
 // Main
-const HomePage = () => import('');
-const NotFound = () => import('');
+const HomePage = Loadable(lazy(() => import('../components/test/Test')));;
+const NotFound = Loadable(lazy(() => import('../components/test/Test')));;
