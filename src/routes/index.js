@@ -47,9 +47,9 @@ export default function Router() {
         },
         {
             path: '/',
-            element: <HomePage />,
+            element: <NavBar />,
             children: [
-                { element: <HomePage />, index: true }
+                { element: <NavBar />, index: true }
             ],
         },
         { path: '*', element: <Navigate to="/404" replace /> },
@@ -65,3 +65,5 @@ const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
 const HomePage = Loadable(lazy(() => import('../components/home/Home')));
 const NotFound = Loadable(lazy(() => import('../components/test/Test')));
+//components
+const NavBar = Loadable(lazy(() => import('../components/navbar/Navbar')));
