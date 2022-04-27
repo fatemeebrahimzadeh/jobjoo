@@ -16,6 +16,10 @@ export default function Router() {
             element: <Test/>
         },
         {
+            path: 'test2',
+            element: <Test2/>
+        },
+        {
             path: 'auth',
             children: [
                 {
@@ -57,6 +61,7 @@ export default function Router() {
 }
 // test
 const Test = Loadable(lazy(() => import('../components/test/Test')));
+const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
 ;
 
 // Authentication

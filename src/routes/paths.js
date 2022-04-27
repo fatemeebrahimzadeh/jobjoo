@@ -17,5 +17,6 @@ export const PATH_AUTH = {
 
 export const PATH_PAGE = {
     test : '/test',
+    test2 : '/test2',
     page404: '/404',
 };
