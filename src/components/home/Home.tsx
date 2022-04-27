@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
+import Test2 from "../test/Test2";
 
 export default class Home extends Component {
     render() {
@@ -12,7 +13,9 @@ export default class Home extends Component {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه کاریابی آنلاین</h1>
                     <h3>موتور جستجو هوشمند آگهی</h3>
-                    <div className="selectBox"></div>
+                    <div className="selectBox">
+                        <Test2/>
+                    </div>
                     {/* should be dynamic */}
                     <div className="companyLogos">
                         <div className="companyLogo"></div>
