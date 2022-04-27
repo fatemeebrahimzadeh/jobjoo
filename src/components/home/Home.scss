@@ -1,0 +1,77 @@
+.HomePage {
+    display: flex;
+    height: calc(100vh - 87px);
+
+    .homeImg {
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 425px;
+            height: 508px;
+            /* margin: 75px 109px 0 100px; */
+            object-fit: contain;
+        }
+    }
+
+    .searchSection {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 100px;
+
+        h1 {
+            width: 600px;
+            height: 66px;
+            /* margin: 157px 88px 8px 153px; */
+            font-family: BYekan;
+            font-size: 35px;
+            line-height: 1.51;
+            text-align: right;
+            color: #100f0f;
+        }
+
+        h3 {
+            width: 610px;
+            height: 40px;
+            /* margin: 8px 91px 30px 140px; */
+            font-family: BYekan;
+            font-size: 20px;
+            line-height: 1.5;
+            text-align: right;
+            color: #100f0f;
+            margin: 5px;
+        }
+
+        .selectBox {
+            width: 650px;
+            height: 62px;
+            /* margin: 30px 82px 25px 109px; */
+            padding: 11px 20px 11px 12px;
+            border-radius: 14px;
+            border: solid 1px rgba(112, 112, 112, 0.39);
+            background-color: #fff;
+            margin: 10px 0 10px 10px;
+        }
+
+        .companyLogos {
+            display: flex;
+            justify-content: space-around;
+            width: 98%;
+
+            .companyLogo {
+                width: 60px;
+                height: 59px;
+                /* margin: 25px 88px 136px 22px; */
+                border-radius: 20px;
+                border: solid 1px rgba(112, 112, 112, 0.39);
+                background-color: #fff;
+                /* margin: 2px; */
+            }
+        }
+    }
+}
