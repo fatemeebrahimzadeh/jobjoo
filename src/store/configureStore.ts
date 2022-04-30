@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk, { ThunkMiddleware } from "redux-thunk";
 import { AppAction } from "../@types/store";
-import { rangeReducer } from "./reducers/range";
+import { rangesReducer } from "./reducers/ranges";
 
 export const rootReducer = combineReducers({
-  ranges: rangeReducer
+  ranges: rangesReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

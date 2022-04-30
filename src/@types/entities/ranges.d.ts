@@ -1,4 +1,4 @@
-export interface IRange {
+export interface IRanges {
     homes: {
         name: string
         min_salary: number

@@ -63,6 +63,5 @@ const Login = Loadable(lazy(() => import('../components/test/Test')));
 const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
-const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 //components
 // const CustomNavbar = Loadable(lazy(() => import('../components/Navbar/Navbar')));

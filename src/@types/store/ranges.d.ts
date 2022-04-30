@@ -4,7 +4,7 @@ export interface ISetRanges {
 
     type: typeof SET_RANGES
     payload: {
-        ranges: IRange[]
+        ranges: IRanges
     }
 
 }

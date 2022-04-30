@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Dispatch } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
 import SelectBox from "../../components/selectBox/SelectBox";
@@ -6,6 +6,10 @@ import iranEstekhdamLogo from "../../assets/img/iranEstekhdamLogo.png"
 import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
 import sheypourLogo from "../../assets/img/sheypourLogo.png"
+import { connect } from "react-redux";
+import { IAppState } from "../../store/configureStore";
+import { IRanges } from "../../@types/entities/ranges";
+import { AppAction } from "../../@types/store";
 
 let companyLogos: {
     img: string
@@ -79,7 +83,20 @@ let selectBoxOptions: {
         }
     ]
 
-export default class Home extends Component {
+interface IState {
+    ranges: IRanges
+}
+
+interface IProps { }
+
+class Home extends Component<IProps & ILinkStateToProps, IState> {
+
+    componentDidMount() {
+        let { ranges } = this.props
+        console.log("[Home]", ranges)
+        this.setState({ ranges })
+    }
+
     render() {
 
         let companyLogosImage = companyLogos.map((companyLogo, index) => {
@@ -106,3 +123,13 @@ export default class Home extends Component {
         )
     }
 }
+
+interface ILinkStateToProps {
+    ranges: IRanges
+}
+
+function mapStateToProps(state: IAppState): ILinkStateToProps {
+    return { ranges: state.ranges }
+}
+
+export default connect(mapStateToProps)(Home)
