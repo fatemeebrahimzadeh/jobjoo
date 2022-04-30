@@ -13,11 +13,12 @@
     .loginBtn {
         width: 159px;
         height: 51px;
-        /* margin: 0 1019px 0 0; */
         padding: 13px 31px 12px 20px;
         border-radius: 10px;
         border: solid 1px #707070;
         background-color: #ffa81f;
+        display: flex;
+        justify-content: center;
     }
 
     .Navbar__logo {
