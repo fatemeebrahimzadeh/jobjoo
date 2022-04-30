@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
-import Test2 from "../test/Test2";
+import SelectBox from "../../components/selectBox/SelectBox";
 
 export default class Home extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class Home extends Component {
                     <h1>جابجو بزرگترین سامانه کاریابی آنلاین</h1>
                     <h3>موتور جستجو هوشمند آگهی</h3>
                     <div className="selectBox">
-                        <Test2/>
+                        <SelectBox />
                     </div>
                     {/* should be dynamic */}
                     <div className="companyLogos">

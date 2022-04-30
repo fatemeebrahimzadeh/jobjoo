@@ -16,10 +16,6 @@ export default function Router() {
             element: <Test />
         },
         {
-            path: 'test2',
-            element: <Test2/>
-        },
-        {
             path: 'auth',
             children: [
                 {
@@ -61,14 +57,12 @@ export default function Router() {
 }
 // test
 const Test = Loadable(lazy(() => import('../components/test/Test')));
-const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
-;
 
 // Authentication
 const Login = Loadable(lazy(() => import('../components/test/Test')));
 const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
-const HomePage = Loadable(lazy(() => import('../components/home/Home')));
+const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 //components
 // const CustomNavbar = Loadable(lazy(() => import('../components/Navbar/Navbar')));
