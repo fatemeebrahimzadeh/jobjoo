@@ -1,5 +1,5 @@
-import { IUsersAction } from './user.d'
+import { IRangesActions } from './ranges.d'
 
 // main Action Types
-export type AppAction = IUsersAction 
+export type AppAction = IRangesActions
 // export type AppAction = IUsersAction | ...

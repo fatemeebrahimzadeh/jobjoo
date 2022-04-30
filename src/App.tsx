@@ -3,8 +3,9 @@ import Router from './routes';
 import './App.css';
 import Navbar from "./components/navbar/Navbar"
 import DotLoader from "react-spinners/DotLoader";
-// import { synceDatabase } from './utils/testgetdb';
+// import { getAllDB } from './utils/testgetdb';
 import { store } from './store/configureStore';
+import { synceDatabase } from './utils/getDatabase';
 
 interface IState {
   isLoading: boolean
@@ -22,7 +23,8 @@ class App extends Component<{}, IState> {
 
   setDatabaseToRedux = async () => {
     try {
-      // await synceDatabase(store.dispatch)
+      // await getAllDB(store.dispatch)
+      await synceDatabase(store.dispatch)
       this.setState({ isLoading: false })
 
     } catch (error) {
