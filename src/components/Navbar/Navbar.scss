@@ -19,6 +19,10 @@
         background-color: #ffa81f;
         display: flex;
         justify-content: center;
+
+        .Button--left-H-line {
+            border-left: 2px solid #fff;
+        }
     }
 
     .Navbar__logo {
