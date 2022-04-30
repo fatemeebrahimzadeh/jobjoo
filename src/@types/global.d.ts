@@ -5,6 +5,6 @@ export interface IPropsWithRouter<Params = {}, StaticContext = {}, State = {}> e
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    islogin: boolean
+    // islogin: boolean
   }
 }

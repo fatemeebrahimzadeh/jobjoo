@@ -7,3 +7,12 @@
   font-family: BYekan;
   src: url(./assets/font//BYekan.ttf);
 }
+
+.spannerWrapper {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 87px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
