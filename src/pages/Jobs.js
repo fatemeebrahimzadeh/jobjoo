@@ -1,6 +1,7 @@
 import {Card, Grid} from "@mui/material";
 import Test2 from "../components/test/Test2";
 import './jobs.css'
+import NavbarVertical from '../components/navbar/NavbarVertical'
 
 const Jobs = () =>{
     return(
@@ -12,7 +13,7 @@ const Jobs = () =>{
             </Grid>
             <Grid item xs={3}>
                 <Card>
-                    hello
+                    <NavbarVertical/>
                 </Card>
             </Grid>
         </Grid>
