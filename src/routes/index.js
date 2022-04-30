@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+import Jobs from "../pages/Jobs";
 
 const Loadable = (Component) => (props) => {
 
@@ -14,6 +15,10 @@ export default function Router() {
         {
             path: 'test',
             element: <Test />
+        },
+        {
+            path: 'jobs',
+            element: <JobsPage />
         },
         {
             path: 'test2',
@@ -65,10 +70,9 @@ const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
 ;
 
 // Authentication
-const Login = Loadable(lazy(() => import('../components/test/Test')));
-const Register = Loadable(lazy(() => import('../components/test/Test')));
+// const Login = Loadable(lazy(() => import('../components/test/Test')));
+// const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
 const HomePage = Loadable(lazy(() => import('../components/home/Home')));
-const NotFound = Loadable(lazy(() => import('../components/test/Test')));
-//components
-// const CustomNavbar = Loadable(lazy(() => import('../components/Navbar/Navbar')));
+// const NotFound = Loadable(lazy(() => import('../components/test/Test')));
+const JobsPage = Loadable(lazy(() => import('../pages/Jobs')));
