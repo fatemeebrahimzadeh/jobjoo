@@ -7,32 +7,35 @@ import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
 import sheypourLogo from "../../assets/img/sheypourLogo.png"
 
-let companyLogos = [
-    {
-        img: sheypourLogo,
-        linkAddress: "https://www.sheypoor.com/%D8%AA%D9%87%D8%B1%D8%A7%D9%86/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85"
-    },
-    {
-        img: jobinjaLogo,
-        linkAddress: "https://jobinja.ir/"
-    },
-    {
-        img: jobvisionLogo,
-        linkAddress: "https://jobvision.ir/"
-    },
-    {
-        img: iranEstekhdamLogo,
-        linkAddress: "https://iranestekhdam.ir/"
-    },
-    {
-        img: sheypourLogo,
-        linkAddress: "https://www.sheypoor.com/%D8%AA%D9%87%D8%B1%D8%A7%D9%86/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85"
-    },
-    {
-        img: jobinjaLogo,
-        linkAddress: "https://jobinja.ir/"
-    }
-]
+let companyLogos: {
+    img: string
+    linkAddress: string
+}[] = [
+        {
+            img: sheypourLogo,
+            linkAddress: "https://www.sheypoor.com/%D8%AA%D9%87%D8%B1%D8%A7%D9%86/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85"
+        },
+        {
+            img: jobinjaLogo,
+            linkAddress: "https://jobinja.ir/"
+        },
+        {
+            img: jobvisionLogo,
+            linkAddress: "https://jobvision.ir/"
+        },
+        {
+            img: iranEstekhdamLogo,
+            linkAddress: "https://iranestekhdam.ir/"
+        },
+        {
+            img: sheypourLogo,
+            linkAddress: "https://www.sheypoor.com/%D8%AA%D9%87%D8%B1%D8%A7%D9%86/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85"
+        },
+        {
+            img: jobinjaLogo,
+            linkAddress: "https://jobinja.ir/"
+        }
+    ]
 
 export default class Home extends Component {
     render() {
