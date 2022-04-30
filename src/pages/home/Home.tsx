@@ -1,7 +1,7 @@
 import React, { Component, Dispatch } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
-import SelectBox from "../../components/selectBox/SelectBox";
+import SelectBox, { ISelectBoxOption } from "../../components/selectBox/SelectBox";
 import iranEstekhdamLogo from "../../assets/img/iranEstekhdamLogo.png"
 import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
@@ -41,48 +41,6 @@ let companyLogos: {
         }
     ]
 
-let selectBoxOptions: {
-    type: "Select" | "TextField"
-    label: string
-    width?: string
-    options?: { label: string, id: number }[]
-}[] = [
-        {
-            type: "Select",
-            label: "استان",
-            options: [{ label: "fateme", id: 1 }],
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "شهر",
-            options: [{ label: "fateme", id: 1 }],
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "حقوق",
-            options: [{ label: "fateme", id: 1 }],
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "بیمه",
-            options: [{ label: "fateme", id: 1 }],
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "نوع همکاری",
-            options: [{ label: "fateme", id: 1 }],
-            width: "120px"
-        },
-        {
-            type: "TextField",
-            label: "دسته بندی شغلی"
-        }
-    ]
-
 interface IState {
     ranges: IRanges
 }
@@ -91,10 +49,47 @@ interface IProps { }
 
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
+    selectBoxElements: ISelectBoxOption[] = []
+
     componentDidMount() {
         let { ranges } = this.props
-        console.log("[Home]", ranges)
         this.setState({ ranges })
+        this.selectBoxElements = [
+            {
+                type: "Select",
+                label: "استان",
+                options: ranges.provinces,
+                width: "110px"
+            },
+            {
+                type: "Select",
+                label: "شهر",
+                options: [{ name: "fateme", id: 1 }],
+                width: "110px"
+            },
+            {
+                type: "Select",
+                label: "حقوق",
+                options: [{ name: "fateme", id: 1 }],
+                width: "110px"
+            },
+            {
+                type: "Select",
+                label: "بیمه",
+                options: [{ name: "fateme", id: 1 }],
+                width: "110px"
+            },
+            {
+                type: "Select",
+                label: "نوع همکاری",
+                options: [{ name: "fateme", id: 1 }],
+                width: "120px"
+            },
+            {
+                type: "TextField",
+                label: "دسته بندی شغلی"
+            }
+        ]
     }
 
     render() {
@@ -114,7 +109,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <SelectBox selectBoxOptions={selectBoxOptions} />
+                    <SelectBox selectBoxElements={this.selectBoxElements} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>
