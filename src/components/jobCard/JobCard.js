@@ -6,6 +6,7 @@ const JobCard = () =>{
             <Grid item></Grid>
             <Grid item></Grid>
             <Grid item></Grid>
+
         </Grid>
     );
 }
