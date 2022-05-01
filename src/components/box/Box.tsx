@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import "./Box.scss"
 import { Autocomplete, Button, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import Limitation from "../UI/limitation/Limitation";
 
 export interface IBoxOption {
-    type: "Select" | "TextField" | "Component"
+    type: "Select" | "TextField" | "experienceComponent" | "salaryComponent"
     label: string
     width?: string
     options?: { name: string, id: number }[]
     payload?: { min: number, max: number }
+}
+
+interface IState {
+    experiencelimitationShow: boolean
+    salarylimitationShow: boolean
 }
 
 interface IProps {
@@ -16,7 +22,20 @@ interface IProps {
     searchOnClickHandler(): void
 }
 
-export default class SelectBox extends Component<IProps> {
+export default class Box extends Component<IProps, IState> {
+
+    state = {
+        experiencelimitationShow: false,
+        salarylimitationShow: false
+    }
+
+    experiencelimitationButtonOnClickHandler = () => {
+        this.setState({ experiencelimitationShow: !this.state.experiencelimitationShow })
+    }
+
+    salarylimitationButtonOnClickHandler = () => {
+        this.setState({ salarylimitationShow: !this.state.salarylimitationShow })
+    }
 
     render() {
 
@@ -35,8 +54,16 @@ export default class SelectBox extends Component<IProps> {
                     />
                 case "TextField":
                     return <TextField key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
-                case "Component":
-                    return <Button onClick={} variant="contained" size="large">{boxElement.label}</Button>
+                case "experienceComponent":
+                    return <div>
+                        <Button key={index} onClick={this.experiencelimitationButtonOnClickHandler} variant="contained" size="large">{boxElement.label}</Button>
+                        <Limitation limitationShow={this.state.experiencelimitationShow} />
+                    </div>
+                case "salaryComponent":
+                    return <div>
+                        <Button key={index} onClick={this.salarylimitationButtonOnClickHandler} variant="contained" size="large">{boxElement.label}</Button>
+                        <Limitation limitationShow={this.state.salarylimitationShow} />
+                    </div>
             }
         })
 

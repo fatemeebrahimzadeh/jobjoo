@@ -71,13 +71,13 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 width: "110px"
             },
             {
-                type: "Component",
+                type: "experienceComponent",
                 label: "سابقه کار",
                 payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
                 width: "110px"
             },
             {
-                type: "Component",
+                type: "salaryComponent",
                 label: "حقوق",
                 payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
                 width: "110px"
