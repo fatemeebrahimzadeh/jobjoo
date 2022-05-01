@@ -70,47 +70,52 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 options: ranges.provinces,
                 width: "110px"
             },
-            {
-                type: "experienceComponent",
-                label: "سابقه کار",
-                payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
-                width: "110px"
-            },
-            {
-                type: "salaryComponent",
-                label: "حقوق",
-                payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
-                width: "110px"
-            },
-            {
-                type: "Select",
-                label: "بیمه",
-                options: insurnaceSelectOptopns,
-                width: "110px"
-            },
-            {
-                type: "Select",
-                label: "جنسیت",
-                options: genderSelectOptopns,
-                width: "120px"
-            },
-            {
-                type: "Select",
-                label: "وضعیت تحصیل",
-                options: educationSelectOptopns,
-                width: "120px"
-            },
-            {
-                type: "Select",
-                label: "نوع قرارداد",
-                options: cooperationSelectOptopns,
-                width: "120px"
-            },
+            // {
+            //     type: "experienceComponent",
+            //     label: "سابقه کار",
+            //     payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
+            //     width: "110px"
+            // },
+            // {
+            //     type: "salaryComponent",
+            //     label: "حقوق",
+            //     payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
+            //     width: "110px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "بیمه",
+            //     options: insurnaceSelectOptopns,
+            //     width: "110px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "جنسیت",
+            //     options: genderSelectOptopns,
+            //     width: "120px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "وضعیت تحصیل",
+            //     options: educationSelectOptopns,
+            //     width: "120px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "نوع قرارداد",
+            //     options: cooperationSelectOptopns,
+            //     width: "120px"
+            // },
             {
                 type: "Select",
                 label: "دسته بندی شغلی",
                 options: categoriesSelectOptopns,
                 width: "120px"
+            },
+            {
+                type: "TextField",
+                label: "عنوان شغلی",
+                width: "150px"
             }
         ]
     }
