@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Router from './routes';
 import './App.css';
 import Navbar from "./components/navbar/Navbar"
-import DotLoader from "react-spinners/DotLoader";
 // import { getAllDB } from './utils/testgetdb';
 import { store } from './store/configureStore';
 import { synceDatabase } from './utils/getDatabase';
+import Spinner from './components/UI/spinner/Spinner';
 
 interface IState {
   isLoading: boolean
@@ -36,7 +36,7 @@ class App extends Component<{}, IState> {
     return (
       <div className='App'>
         <Navbar />
-        {this.state.isLoading ? <div className='spannerWrapper'><DotLoader color="#ffa81f" loading={this.state.isLoading} size={60} /></div> : <Router />}
+        {this.state.isLoading ? <Spinner isLoading={this.state.isLoading} /> : <Router />}
       </div >
     );
   }
