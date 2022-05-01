@@ -1,5 +1,5 @@
-.selectBox {
-    width: 850px;
+.Box {
+    width: 650px;
     height: 62px;
     padding: 11px 20px 11px 12px;
     border-radius: 14px;
@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
 
-    .selectBox__btn {
+    .Box__btn {
         display: flex;
         justify-content: center;
         width: 40px;
@@ -19,9 +19,5 @@
         border-radius: 10px;
         background-color: #ffa81f;
         outline: none;
-
-        // :hover {
-        //     background-color: #f89800;
-        // }
     }
 }

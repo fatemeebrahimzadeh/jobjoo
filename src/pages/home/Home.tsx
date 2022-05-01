@@ -1,7 +1,7 @@
 import React, { Component, Dispatch } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
-import SelectBox, { ISelectBoxOption } from "../../components/selectBox/SelectBox";
+import Box, { IBoxOption } from "../../components/box/Box";
 import iranEstekhdamLogo from "../../assets/img/iranEstekhdamLogo.png"
 import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
@@ -43,63 +43,106 @@ let companyLogos: {
         }
     ]
 
+export interface IHomeDate {
+
+}
+
 interface IState {
     ranges: IRanges
+    data: IHomeDate
 }
 
 interface IProps { }
 
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
-    selectBoxElements: ISelectBoxOption[] = []
+    boxElements: IBoxOption[] = []
+
+    // state={
+    //     data:{}
+    // }
 
     componentDidMount() {
         let { ranges } = this.props
+
+        let insurnaceSelectOptopns = ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
+        let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
+        let cooperationSelectOptopns = ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
+        let educationSelectOptopns = ranges.homes.education.map((option, index) => { return { name: option, id: index } })
+        let genderSelectOptopns = ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
+
         this.setState({ ranges })
-        this.selectBoxElements = [
+        this.boxElements = [
             {
                 type: "Select",
                 label: "استان",
                 options: ranges.provinces,
-                width: "110px"
+                width: "190px"
             },
+            // {
+            //     type: "experienceComponent",
+            //     label: "سابقه کار",
+            //     payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
+            //     width: "110px"
+            // },
+            // {
+            //     type: "salaryComponent",
+            //     label: "حقوق",
+            //     payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
+            //     width: "110px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "بیمه",
+            //     options: insurnaceSelectOptopns,
+            //     width: "110px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "جنسیت",
+            //     options: genderSelectOptopns,
+            //     width: "120px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "وضعیت تحصیل",
+            //     options: educationSelectOptopns,
+            //     width: "120px"
+            // },
+            // {
+            //     type: "Select",
+            //     label: "نوع قرارداد",
+            //     options: cooperationSelectOptopns,
+            //     width: "120px"
+            // },
             {
                 type: "Select",
-                label: "شهر",
-                options: [{ name: "fateme", id: 1 }],
-                width: "110px"
-            },
-            {
-                type: "Select",
-                label: "حقوق",
-                options: [{ name: "fateme", id: 1 }],
-                width: "110px"
-            },
-            {
-                type: "Select",
-                label: "بیمه",
-                options: [{ name: "fateme", id: 1 }],
-                width: "110px"
-            },
-            {
-                type: "Select",
-                label: "نوع همکاری",
-                options: [{ name: "fateme", id: 1 }],
-                width: "120px"
+                label: "دسته بندی شغلی",
+                options: categoriesSelectOptopns,
+                width: "190px"
             },
             {
                 type: "TextField",
-                label: "دسته بندی شغلی"
+                label: "عنوان شغلی",
+                width: "190px"
             }
         ]
     }
 
-    //#region SelectBox
+    //#region Box
 
     searchOnClickHandler = async () => {
+<<<<<<< HEAD
         // let ranges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
         // let ranges = await Axios.post('/api/data/ranges')
         // return ranges.data
+=======
+        // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
+        let respone = await Axios.post('/api/search/recruiment/Home/', {
+            // data
+        })
+        // return renges.data
+>>>>>>> fateme-ebrahimzade
         // should to go to second page
         // spinner
     }
@@ -123,7 +166,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <SelectBox selectBoxElements={this.selectBoxElements} searchOnClickHandler={this.searchOnClickHandler} />
+                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>

@@ -1,4 +1,4 @@
-import SelectBox from "../selectBox/SelectBox";
+import SelectBox from "../box/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
