@@ -55,6 +55,14 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     componentDidMount() {
         let { ranges } = this.props
+        console.log("ranges", ranges)
+
+        let insurnaceSelectOptopns = ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
+        let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
+        let cooperationSelectOptopns = ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
+        let educationSelectOptopns = ranges.homes.education.map((option, index) => { return { name: option, id: index } })
+        let genderSelectOptopns = ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
+
         this.setState({ ranges })
         this.selectBoxElements = [
             {
@@ -64,13 +72,13 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 width: "110px"
             },
             {
-                type: "Select",
-                label: "شهر",
+                type: "Component",
+                label: "سابقه کار",
                 options: [{ name: "fateme", id: 1 }],
                 width: "110px"
             },
             {
-                type: "Select",
+                type: "Component",
                 label: "حقوق",
                 options: [{ name: "fateme", id: 1 }],
                 width: "110px"
@@ -78,18 +86,32 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
             {
                 type: "Select",
                 label: "بیمه",
-                options: [{ name: "fateme", id: 1 }],
+                options: insurnaceSelectOptopns,
                 width: "110px"
             },
             {
                 type: "Select",
-                label: "نوع همکاری",
-                options: [{ name: "fateme", id: 1 }],
+                label: "جنسیت",
+                options: genderSelectOptopns,
                 width: "120px"
             },
             {
-                type: "TextField",
-                label: "دسته بندی شغلی"
+                type: "Select",
+                label: "وضعیت تحصیل",
+                options: educationSelectOptopns,
+                width: "120px"
+            },
+            {
+                type: "Select",
+                label: "نوع قرارداد",
+                options: cooperationSelectOptopns,
+                width: "120px"
+            },
+            {
+                type: "Select",
+                label: "دسته بندی شغلی",
+                options: categoriesSelectOptopns,
+                width: "120px"
             }
         ]
     }

@@ -4,7 +4,7 @@ import { Autocomplete, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 export interface ISelectBoxOption {
-    type: "Select" | "TextField"
+    type: "Select" | "TextField" | "Component"
     label: string
     width?: string
     options?: { name: string, id: number }[]
@@ -23,6 +23,7 @@ export default class SelectBox extends Component<IProps> {
             switch (selectBoxElement.type) {
                 case "Select":
                     return <Autocomplete
+                        // multiple
                         key={index}
                         sx={{ width: `${selectBoxElement.width && selectBoxElement.width}` }}
                         disablePortal

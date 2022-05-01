@@ -6,10 +6,10 @@ export interface IRanges {
         min_experience: number
         max_experience: number
         categories: string[]
-        education: string
-        cooperation: string
-        gender: string
-        insurnace: string
+        education: string[]
+        cooperation: string[]
+        gender: string[]
+        insurnace: string[]
     }
     provinces: {
         id: number
