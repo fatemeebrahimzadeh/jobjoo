@@ -1,6 +1,7 @@
 import {Card, Grid, Stack, Typography} from "@mui/material";
 import RecruitmentSpecification from "../../components/recruitmentSpecification/RecruitmentSpecification";
 import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
+import RecruitmentBrief from "../../components/recruitmentBrief/RecruitmentBrief";
 
 const titleStyle = {
     marginBottom: '15px',
@@ -19,7 +20,7 @@ const Recruitment = () => {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <Card>a</Card>
+                <RecruitmentBrief/>
             </Grid>
             <Grid item xs={7}>
                 <Stack>
