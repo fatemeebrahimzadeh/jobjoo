@@ -33,11 +33,11 @@ export default class Box extends Component<IProps, IState> {
     }
 
     experiencelimitationButtonOnClickHandler = () => {
-        this.setState({ experiencelimitationShow: !this.state.experiencelimitationShow })
+        this.setState({ experiencelimitationShow: !this.state.experiencelimitationShow, salarylimitationShow: false })
     }
 
     salarylimitationButtonOnClickHandler = () => {
-        this.setState({ salarylimitationShow: !this.state.salarylimitationShow })
+        this.setState({ salarylimitationShow: !this.state.salarylimitationShow, experiencelimitationShow: false })
     }
 
     render() {

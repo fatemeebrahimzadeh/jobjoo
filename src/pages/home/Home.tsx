@@ -87,11 +87,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     componentDidMount() {
         let { ranges } = this.props
 
-        let insurnaceSelectOptopns = ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
         let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
-        let cooperationSelectOptopns = ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
-        let educationSelectOptopns = ranges.homes.education.map((option, index) => { return { name: option, id: index } })
-        let genderSelectOptopns = ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
 
         this.setState({ ranges })
         this.boxElements = [
@@ -102,42 +98,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 width: "190px",
                 fieldName: "provinces"
             },
-            // {
-            //     type: "experienceComponent",
-            //     label: "سابقه کار",
-            //     payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
-            //     width: "110px"
-            // },
-            // {
-            //     type: "salaryComponent",
-            //     label: "حقوق",
-            //     payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
-            //     width: "110px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "بیمه",
-            //     options: insurnaceSelectOptopns,
-            //     width: "110px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "جنسیت",
-            //     options: genderSelectOptopns,
-            //     width: "120px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "وضعیت تحصیل",
-            //     options: educationSelectOptopns,
-            //     width: "120px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "نوع قرارداد",
-            //     options: cooperationSelectOptopns,
-            //     width: "120px"
-            // },
             {
                 type: "Select",
                 label: "دسته بندی شغلی",
