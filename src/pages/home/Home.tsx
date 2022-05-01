@@ -124,7 +124,9 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     searchOnClickHandler = async () => {
         // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
-        // let renges = await Axios.post('/api/data/ranges')
+        let respone = await Axios.post('/api/search/recruiment/Home/', {
+            // data
+        })
         // return renges.data
         // should to go to second page
         // spinner
