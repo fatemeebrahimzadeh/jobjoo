@@ -55,7 +55,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     componentDidMount() {
         let { ranges } = this.props
-        console.log("ranges", ranges)
 
         let insurnaceSelectOptopns = ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
         let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
@@ -74,13 +73,13 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
             {
                 type: "Component",
                 label: "سابقه کار",
-                options: [{ name: "fateme", id: 1 }],
+                payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
                 width: "110px"
             },
             {
                 type: "Component",
                 label: "حقوق",
-                options: [{ name: "fateme", id: 1 }],
+                payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
                 width: "110px"
             },
             {

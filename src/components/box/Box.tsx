@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Box.scss"
-import { Autocomplete, IconButton, TextField } from "@mui/material";
+import { Autocomplete, Button, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 export interface IBoxOption {
@@ -8,6 +8,7 @@ export interface IBoxOption {
     label: string
     width?: string
     options?: { name: string, id: number }[]
+    payload?: { min: number, max: number }
 }
 
 interface IProps {
@@ -34,6 +35,8 @@ export default class SelectBox extends Component<IProps> {
                     />
                 case "TextField":
                     return <TextField key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
+                case "Component":
+                    return <Button onClick={} variant="contained" size="large">{boxElement.label}</Button>
             }
         })
 
