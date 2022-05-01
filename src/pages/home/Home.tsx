@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import { IAppState } from "../../store/configureStore";
 import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
+import { Axios } from "../../utils/axios";
+import { AxiosResponse } from "axios";
 
 let companyLogos: {
     img: string
@@ -92,6 +94,17 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         ]
     }
 
+    //#region SelectBox
+
+    searchOnClickHandler = async () => {
+        // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
+        // let renges = await Axios.post('/api/data/ranges')
+        // return renges.data
+        // should to go to second page
+    }
+
+    //#endregion
+
     render() {
 
         let companyLogosImage = companyLogos.map((companyLogo, index) => {
@@ -109,7 +122,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <SelectBox selectBoxElements={this.selectBoxElements} />
+                    <SelectBox selectBoxElements={this.selectBoxElements} searchOnClickHandler={this.searchOnClickHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>
