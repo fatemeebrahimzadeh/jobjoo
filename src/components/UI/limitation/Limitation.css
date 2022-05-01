@@ -1,0 +1,14 @@
+.dropdown {
+  position: absolute;
+  background-color: #fff;
+  width: 250px;
+  height: 130px;
+  border-radius: 3px;
+  transition: all 0.5s;
+  z-index: 1031;
+}
+.dropdown label {
+  display: flex;
+}
+
+/*# sourceMappingURL=Limitation.css.map */

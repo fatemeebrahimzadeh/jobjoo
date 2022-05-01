@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { Box, Card, Grid } from "@mui/material";
 import CustomBox from "../components/box/Box";
 import './jobs.css'
+=======
+import {Card, Grid} from "@mui/material";
+import Test2 from "../components/test/Test2";
+>>>>>>> fateme-karimi
 import NavbarVertical from '../components/navbar/NavbarVertical'
 import JobCard from "../components/jobCard/JobCard";
 import corporationLogo from '../assets/img/corporation-logo.jpg'
