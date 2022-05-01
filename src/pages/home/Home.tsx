@@ -1,7 +1,7 @@
 import React, { Component, Dispatch } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
-import SelectBox, { ISelectBoxOption } from "../../components/selectBox/SelectBox";
+import Box, { IBoxOption } from "../../components/box/Box";
 import iranEstekhdamLogo from "../../assets/img/iranEstekhdamLogo.png"
 import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
@@ -51,7 +51,7 @@ interface IProps { }
 
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
-    selectBoxElements: ISelectBoxOption[] = []
+    boxElements: IBoxOption[] = []
 
     componentDidMount() {
         let { ranges } = this.props
@@ -64,7 +64,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         let genderSelectOptopns = ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
 
         this.setState({ ranges })
-        this.selectBoxElements = [
+        this.boxElements = [
             {
                 type: "Select",
                 label: "استان",
@@ -116,7 +116,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         ]
     }
 
-    //#region SelectBox
+    //#region Box
 
     searchOnClickHandler = async () => {
         // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
@@ -145,7 +145,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <SelectBox selectBoxElements={this.selectBoxElements} searchOnClickHandler={this.searchOnClickHandler} />
+                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>

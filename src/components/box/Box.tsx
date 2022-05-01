@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./SelectBox.scss"
+import "./Box.scss"
 import { Autocomplete, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
-export interface ISelectBoxOption {
+export interface IBoxOption {
     type: "Select" | "TextField" | "Component"
     label: string
     width?: string
@@ -11,7 +11,7 @@ export interface ISelectBoxOption {
 }
 
 interface IProps {
-    selectBoxElements: ISelectBoxOption[]
+    boxElements: IBoxOption[]
     searchOnClickHandler(): void
 }
 
@@ -19,30 +19,30 @@ export default class SelectBox extends Component<IProps> {
 
     render() {
 
-        let selectBoxElements = this.props.selectBoxElements.map((selectBoxElement, index) => {
-            switch (selectBoxElement.type) {
+        let boxElements = this.props.boxElements.map((boxElement, index) => {
+            switch (boxElement.type) {
                 case "Select":
                     return <Autocomplete
                         // multiple
                         key={index}
-                        sx={{ width: `${selectBoxElement.width && selectBoxElement.width}` }}
+                        sx={{ width: `${boxElement.width && boxElement.width}` }}
                         disablePortal
                         id="combo-box-demo"
-                        options={selectBoxElement.options!}
+                        options={boxElement.options!}
                         getOptionLabel={(option) => option.name}
-                        renderInput={(params) => <TextField {...params} label={selectBoxElement.label} />}
+                        renderInput={(params) => <TextField {...params} label={boxElement.label} />}
                     />
                 case "TextField":
-                    return <TextField key={index} id="outlined-basic" label={selectBoxElement.label} variant="outlined" />
+                    return <TextField key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
             }
         })
 
         return (
-            <div className="selectBox">
-                <IconButton className="selectBox__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
+            <div className="Box">
+                <IconButton className="Box__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
                     <SearchIcon />
                 </IconButton>
-                {selectBoxElements}
+                {boxElements}
             </div>
         )
     }
