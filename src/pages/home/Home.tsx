@@ -101,6 +101,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         // let renges = await Axios.post('/api/data/ranges')
         // return renges.data
         // should to go to second page
+        // spinner
     }
 
     //#endregion
