@@ -44,7 +44,9 @@ let companyLogos: {
     ]
 
 export interface IHomeDate {
-
+    provinces?: { name: string, id: number } | null
+    jobTitle?: string
+    categories?: { name: string, id: number } | null
 }
 
 interface IState {
@@ -57,10 +59,30 @@ interface IProps { }
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     boxElements: IBoxOption[] = []
+    defaultData: IHomeDate = {
+        provinces: null,
+        jobTitle: "",
+        categories: null
+    }
 
-    // state={
-    //     data:{}
-    // }
+    state = {
+        ranges: {
+            homes: {
+                name: "",
+                min_salary: 0,
+                max_salary: 0,
+                min_experience: 0,
+                max_experience: 0,
+                categories: [],
+                education: [],
+                cooperation: [],
+                gender: [],
+                insurnace: []
+            },
+            provinces: []
+        },
+        data: this.defaultData
+    }
 
     componentDidMount() {
         let { ranges } = this.props
@@ -77,7 +99,8 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 type: "Select",
                 label: "استان",
                 options: ranges.provinces,
-                width: "190px"
+                width: "190px",
+                fieldName: "provinces"
             },
             // {
             //     type: "experienceComponent",
@@ -119,12 +142,14 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 type: "Select",
                 label: "دسته بندی شغلی",
                 options: categoriesSelectOptopns,
-                width: "190px"
+                width: "190px",
+                fieldName: "categories"
             },
             {
                 type: "TextField",
                 label: "عنوان شغلی",
-                width: "190px"
+                width: "190px",
+                fieldName: "jobTitle"
             }
         ]
     }
@@ -132,18 +157,31 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region Box
 
     searchOnClickHandler = async () => {
-        // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
-        let respone = await Axios.post('/api/search/recruiment/Home/', {
-            // data
+        let response = await Axios.post('/api/search/recruiment/1/', {
+            search: this.state.data.jobTitle,
+            province: this.state.data.provinces,
+            category: this.state.data.categories
         })
-        // return renges.data
-        // should to go to second page
+        // console.log("response", response)
+        // this.props.history.push('/jobs');
         // spinner
+    }
+
+    onChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>) => {
+        this.setState((prevState: IState) => ({
+            ...prevState,
+            data: {
+                ...prevState.data,
+                [fieldName]: value
+            }
+        }))
     }
 
     //#endregion
 
     render() {
+
+        // console.log("[Home]", this.state.data)
 
         let companyLogosImage = companyLogos.map((companyLogo, index) => {
             return <a
@@ -160,7 +198,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} />
+                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} onChangeHandler={this.onChangeHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>

@@ -8,6 +8,7 @@ import { IHomeDate } from "../../pages/home/Home";
 export interface IBoxOption {
     type: "Select" | "TextField" | "experienceComponent" | "salaryComponent"
     label: string
+    fieldName: keyof IHomeDate
     width?: string
     options?: { name: string, id: number }[]
     payload?: { min: number, max: number }
@@ -21,7 +22,7 @@ interface IState {
 interface IProps {
     boxElements: IBoxOption[]
     searchOnClickHandler(): void
-    // onChangeHandler(value: string, fieldName: IHomeDate, event?: React.SyntheticEvent<Element, Event>): void
+    onChangeHandler(value: { name: string, id: number } | null | string, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>): void
 }
 
 export default class Box extends Component<IProps, IState> {
@@ -46,7 +47,7 @@ export default class Box extends Component<IProps, IState> {
                 case "Select":
                     return <Autocomplete
                         // multiple
-                        onChange={(event) => console.log(event.target)}
+                        onChange={(event: any, newValue: { name: string, id: number } | null) => this.props.onChangeHandler(newValue, boxElement.fieldName, event)}
                         key={index}
                         sx={{ width: `${boxElement.width && boxElement.width}` }}
                         disablePortal
@@ -56,7 +57,7 @@ export default class Box extends Component<IProps, IState> {
                         renderInput={(params) => <TextField {...params} label={boxElement.label} />}
                     />
                 case "TextField":
-                    return <TextField onChange={(event) => console.log(event.target.value)} key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
+                    return <TextField onChange={(event) => this.props.onChangeHandler(event.target.value, boxElement.fieldName, event)} key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
                 case "experienceComponent":
                     return <div>
                         <Button key={index} onClick={this.experiencelimitationButtonOnClickHandler} variant="contained" size="large">{boxElement.label}</Button>
