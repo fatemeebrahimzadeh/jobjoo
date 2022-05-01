@@ -1,28 +1,30 @@
 import {Card, Typography} from "@mui/material";
 
+const cardStyle = {
+    width: '100%',
+    height: '100%',
+    marginTop: ' 68px',
+    marginBottom: '56px',
+    padding: '34px 20px 43px 130px',
+    borderRadius: '15px',
+    borderColor: 'rgba(112, 112, 112, 0.25)',
+    backgroundColor: '#fff'
+}
+const textStyle = {
+    marginBottom:'15px',
+    fontFamily: 'BYekan+',
+    fontSize: '30px',
+    fontWeight: 'bold',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.43,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#4166b7',
+}
+
 const RecruitmentSpecification = () => {
-    const cardStyle = {
-        width: '100%',
-        height: '100%',
-        marginTop: ' 68px',
-        marginBottom: '56px',
-        padding: '34px 20px 43px 130px',
-        borderRadius: '15px',
-        borderColor: 'rgba(112, 112, 112, 0.25)',
-        backgroundColor: '#fff'
-    }
-    const textStyle = {
-        marginBottom:'15px',
-        fontFamily: 'BYekan+',
-        fontSize: '30px',
-        fontWeight: 'bold',
-        fontStretch: 'normal',
-        fontStyle: 'normal',
-        lineHeight: 1.43,
-        letterSpacing: 'normal',
-        textAlign: 'right',
-        color: '#4166b7',
-    }
+
     return (
         <Card sx={cardStyle}>
             <Typography sx={textStyle}>مشخصات آگهی</Typography>
