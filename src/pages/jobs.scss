@@ -2,9 +2,22 @@
   width: 100%;
   height: 62px;
   /* margin: 30px 82px 25px 109px; */
-  padding: 11px 20px 11px 12px;
   border-radius: 14px;
   border: solid 1px rgba(112, 112, 112, 0.39);
   background-color: #fff;
   margin: 10px 0 10px 10px;
+}
+.job-card{
+  width: 100%;
+  height: 150px;
+  padding: 33px 20px 22px 39px;
+  border-radius: 15px;
+  border: solid 1px rgba(112, 112, 112, 0.25);
+  background-color: #fff;
+}
+.company-logo{
+  width: 60px;
+  height: 59px;
+  margin: 5px 0 12px 22px;
+  border: solid 1px #707070;
 }
