@@ -56,9 +56,9 @@ export default function Router() {
         },
         {
             path: '/',
-            element: <Recruitment />,
+            element: <HomePage />,
             children: [
-                { element: <Recruitment />, index: true }
+                { element: <HomePage />, index: true }
             ],
         },
         { path: '*', element: <Navigate to="/404" replace /> },

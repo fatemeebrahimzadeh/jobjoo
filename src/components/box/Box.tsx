@@ -3,6 +3,7 @@ import "./Box.scss"
 import { Autocomplete, Button, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import Limitation from "../UI/limitation/Limitation";
+import { IHomeDate } from "../../pages/home/Home";
 
 export interface IBoxOption {
     type: "Select" | "TextField" | "experienceComponent" | "salaryComponent"
@@ -20,6 +21,7 @@ interface IState {
 interface IProps {
     boxElements: IBoxOption[]
     searchOnClickHandler(): void
+    // onChangeHandler(value: string, fieldName: IHomeDate, event?: React.SyntheticEvent<Element, Event>): void
 }
 
 export default class Box extends Component<IProps, IState> {
@@ -44,6 +46,7 @@ export default class Box extends Component<IProps, IState> {
                 case "Select":
                     return <Autocomplete
                         // multiple
+                        onChange={(event) => console.log(event.target)}
                         key={index}
                         sx={{ width: `${boxElement.width && boxElement.width}` }}
                         disablePortal
@@ -53,7 +56,7 @@ export default class Box extends Component<IProps, IState> {
                         renderInput={(params) => <TextField {...params} label={boxElement.label} />}
                     />
                 case "TextField":
-                    return <TextField key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
+                    return <TextField onChange={(event) => console.log(event.target.value)} key={index} id="outlined-basic" label={boxElement.label} variant="outlined" />
                 case "experienceComponent":
                     return <div>
                         <Button key={index} onClick={this.experiencelimitationButtonOnClickHandler} variant="contained" size="large">{boxElement.label}</Button>

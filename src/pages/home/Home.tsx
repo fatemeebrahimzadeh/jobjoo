@@ -43,8 +43,13 @@ let companyLogos: {
         }
     ]
 
+export interface IHomeDate {
+
+}
+
 interface IState {
     ranges: IRanges
+    data: IHomeDate
 }
 
 interface IProps { }
@@ -52,6 +57,10 @@ interface IProps { }
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     boxElements: IBoxOption[] = []
+
+    // state={
+    //     data:{}
+    // }
 
     componentDidMount() {
         let { ranges } = this.props
@@ -68,7 +77,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 type: "Select",
                 label: "استان",
                 options: ranges.provinces,
-                width: "110px"
+                width: "190px"
             },
             // {
             //     type: "experienceComponent",
@@ -110,12 +119,12 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 type: "Select",
                 label: "دسته بندی شغلی",
                 options: categoriesSelectOptopns,
-                width: "120px"
+                width: "190px"
             },
             {
                 type: "TextField",
                 label: "عنوان شغلی",
-                width: "150px"
+                width: "190px"
             }
         ]
     }
