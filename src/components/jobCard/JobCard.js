@@ -1,16 +1,28 @@
 import {Grid} from "@mui/material";
-import saveIc from '../../assets/icons/ic-save.png'
+import nonSaveIc from '../../assets/icons/ic-save.png'
+import saveIc from '../../assets/icons/ic-save-black.png'
 import corporationIc from '../../assets/icons/ic-corpo.png'
 import cityIc from '../../assets/icons/ic-pin.png'
+import {useState} from "react";
 
-const JobCard = () => {
-    const jobTitle = "Senior UI/UX Designer";
-    const requestDate = "سه روز پیش";
-    const corporation = "فناوران اطلاعات خبره | Fanavaran";
-    const city = "تهران";
+const JobCard = ({jobDetails}) => {
+    const [saveJob ,setSaveJob] = useState(false);
+    const jobDetail = {
+        jobTitle:jobDetails.jobTitle,
+        requestDate : jobDetails.requestDate,
+        enCorporation : jobDetails.enCorporation,
+        faCorporation : jobDetails.faCorporation,
+        city : jobDetails.city,
+        logoSrc :jobDetails.logoSrc
+    }
+    const saveHandler = () =>{
+        setSaveJob(!saveJob);
+    }
+
     return (<Grid container>
             <Grid item xs={2}>
-                <img src={saveIc} alt='save-icon'/>
+                {!saveJob && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler}/>}
+                {saveJob && <img src={saveIc} alt='save-icon' onClick={saveHandler}/>}
             </Grid>
             <Grid item xs={8}>
                 <Grid container justifyContent='end'>
@@ -26,7 +38,7 @@ const JobCard = () => {
                         letterSpacing: 'normal',
                         textAlign: 'right',
                         color: '#33334c'
-                    }}>{requestDate}</Grid>
+                    }}>{jobDetail.requestDate}</Grid>
                     <Grid item sx={{
                         fontFamily: 'BYekan+',
                         fontSize: '21px',
@@ -36,7 +48,7 @@ const JobCard = () => {
                         lineHeight: 1.38,
                         letterSpacing: 'normal',
                         textAlign: 'right',
-                        color: '#4166b7'}}>{jobTitle}</Grid>
+                        color: '#4166b7'}}>{jobDetail.jobTitle}</Grid>
                 </Grid>
                 <Grid container justifyContent='end'>
                     <Grid item sx={{
@@ -51,7 +63,7 @@ const JobCard = () => {
                         letterSpacing: 'normal',
                         textAlign: 'right',
                         color: '#33334c'
-                    }}>{corporation}</Grid>
+                    }}>{jobDetail.faCorporation} | {jobDetail.enCorporation}</Grid>
                     <Grid item sx={{marginTop: '15px'}}><img src={corporationIc}/></Grid>
                 </Grid>
                 <Grid container justifyContent='end'>
@@ -68,13 +80,13 @@ const JobCard = () => {
                         letterSpacing: 'normal',
                         textAlign: 'right',
                         color: '#33334c'
-                    }}>{city}</Grid>
+                    }}>{jobDetail.city}</Grid>
                     <Grid item sx={{marginTop: '15px'}}><img src={cityIc}/></Grid>
                 </Grid>
             </Grid>
             <Grid item xs={2}>
                 <div className='company-logo'>
-
+                    <img src={jobDetail.logoSrc} className='company-logo__image'/>
                 </div>
             </Grid>
 

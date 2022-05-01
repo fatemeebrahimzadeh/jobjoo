@@ -69,11 +69,13 @@ export default function NestedList() {
             }
         >
             <ListItemButton onClick={jobCategoryHandleClick}>
-                {jobCategoryOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
-                <ListItemText sx={navbarTitleStyle}>دسته بندی شغلی</ListItemText>
-                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                {jobCategoryOpen ? <ExpandLess sx={{color: '#4166b7',marginTop:'-20px'}}/> : <ExpandMore sx={{color: '#4166b7',marginTop:'-20px'}}/>}
+                <Stack sx={{width:'100%'}}>
+                    <ListItemText sx={navbarTitleStyle}>دسته بندی شغلی</ListItemText>
+                    <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                </Stack>
             </ListItemButton>
-            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
+            <StepConnector sx={{width: '90%', margin: '10px auto 10px auto'}}/>
             <Collapse in={jobCategoryOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItemButton sx={{pl: 4}}>
@@ -82,11 +84,13 @@ export default function NestedList() {
                 </List>
             </Collapse>
             <ListItemButton onClick={cooperationTypeHandleClick}>
-                {cooperationTypeOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
-                <ListItemText sx={navbarTitleStyle}>نوع همکاری</ListItemText>
-                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                {cooperationTypeOpen ? <ExpandLess sx={{color: '#4166b7',marginTop:'-20px'}}/> : <ExpandMore sx={{color: '#4166b7',marginTop:'-20px'}}/>}
+                <Stack sx={{width:'100%'}}>
+                    <ListItemText sx={navbarTitleStyle}>نوع همکاری</ListItemText>
+                    <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                </Stack>
             </ListItemButton>
-            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
+            <StepConnector sx={{width: '90%', margin: '10px auto 10px auto' }}/>
             <Collapse in={cooperationTypeOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItemButton sx={{pl: 4}}>
@@ -95,11 +99,13 @@ export default function NestedList() {
                 </List>
             </Collapse>
             <ListItemButton onClick={adSourceHandleClick}>
-                {adSourceOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
-                <ListItemText sx={navbarTitleStyle}>منبع آگهی</ListItemText>
-                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                {adSourceOpen ? <ExpandLess sx={{color: '#4166b7',marginTop:'-20px'}}/> : <ExpandMore sx={{color: '#4166b7',marginTop:'-20px'}}/>}
+                <Stack sx={{width:'100%'}}>
+                    <ListItemText sx={navbarTitleStyle}>منبع آگهی</ListItemText>
+                    <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                </Stack>
             </ListItemButton>
-            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
+            <StepConnector sx={{width: '90%', margin: '10px auto 10px auto'}}/>
             <Collapse in={adSourceOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItemButton sx={{pl: 4}}>
@@ -108,11 +114,13 @@ export default function NestedList() {
                 </List>
             </Collapse>
             <ListItemButton onClick={workPlaceHandleClick}>
-                {workPlaceOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
-                <ListItemText sx={navbarTitleStyle}>مکان کار</ListItemText>
-                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                {workPlaceOpen ? <ExpandLess sx={{color: '#4166b7',marginTop:'-20px'}}/> : <ExpandMore sx={{color: '#4166b7',marginTop:'-20px'}}/>}
+                <Stack sx={{width:'100%'}}>
+                    <ListItemText sx={navbarTitleStyle}>مکان کار</ListItemText>
+                    <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                </Stack>
             </ListItemButton>
-            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
+            <StepConnector sx={{width: '90%', margin: '10px auto 10px auto'}}/>
             <Collapse in={workPlaceOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItemButton sx={{pl: 4}}>
@@ -121,8 +129,8 @@ export default function NestedList() {
                 </List>
             </Collapse>
             <ListItemButton onClick={contractTypeHandleClick}>
-                {contractTypeOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
-                <Stack  sx={{marginRight:'-200px'}}>
+                {contractTypeOpen ? <ExpandLess sx={{color: '#4166b7',marginTop:'-20px'}}/> : <ExpandMore sx={{color: '#4166b7',marginTop:'-20px'}}/>}
+                <Stack sx={{width:'100%'}}>
                     <ListItemText sx={navbarTitleStyle}>نوع قرارداد</ListItemText>
                     <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
                 </Stack>
