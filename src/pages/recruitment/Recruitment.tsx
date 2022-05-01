@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RecruitmentBreif from "../../components/recruitmentBreif/RecruitmentBreif";
 import RecruitmentSpecifications from "../../components/recruitmentSpecifications/RecruitmentSpecifications";
-import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
+import SimilarRecruitmentsList from "../../components/similarRecruitments/SimilarRecruitmentsList";
 import "./Recruitment.scss"
 // RecruitmentSpecifications
 
@@ -13,7 +13,7 @@ export default class Recruitment extends Component {
                     {/* <RecruitmentBreif /> */}
                     {/* <RecruitmentSpecifications /> */}
                 </section>
-                <SimilarRecruitment />
+                <SimilarRecruitmentsList />
             </main >
         )
     }
