@@ -22,7 +22,7 @@ export default function Router() {
         },
         {
             path: 'test2',
-            element: <Test2/>
+            element: <Test2 />
         },
         {
             path: 'auth',
@@ -71,6 +71,7 @@ const Test = Loadable(lazy(() => import('../components/test/Test')));
 // const Login = Loadable(lazy(() => import('../components/test/Test')));
 // const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
-const HomePage = Loadable(lazy(() => import('../components/home/Home')));
+const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 const JobsPage = Loadable(lazy(() => import('../pages/Jobs')));
+const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
