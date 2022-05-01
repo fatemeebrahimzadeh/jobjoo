@@ -97,9 +97,9 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region SelectBox
 
     searchOnClickHandler = async () => {
-        // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
-        // let renges = await Axios.post('/api/data/ranges')
-        // return renges.data
+        // let ranges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
+        // let ranges = await Axios.post('/api/data/ranges')
+        // return ranges.data
         // should to go to second page
         // spinner
     }

@@ -7,12 +7,12 @@ import { IRanges } from '../@types/entities/ranges';
 import { setRangesAction } from '../store/actions/ranges';
 
 
-export const synceDatabase = async (dispatch: Dispatch<AppAction>) => {
-    let renges = await getRanges()
-    dispatch(setRangesAction(renges))
+export const syncsDatabase = async (dispatch: Dispatch<AppAction>) => {
+    let ranges = await getRanges()
+    dispatch(setRangesAction(ranges))
 }
 
 const getRanges = async () => {
-    let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
-    return renges.data
+    let ranges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
+    return ranges.data
 }

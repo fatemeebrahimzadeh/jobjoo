@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from "./components/navbar/Navbar"
 // import { getAllDB } from './utils/testgetdb';
 import { store } from './store/configureStore';
-import { synceDatabase } from './utils/getDatabase';
+import { syncsDatabase } from './utils/getDatabase';
 import Spinner from './components/UI/spinner/Spinner';
 
 interface IState {
@@ -24,7 +24,7 @@ class App extends Component<{}, IState> {
   setDatabaseToRedux = async () => {
     try {
       // await getAllDB(store.dispatch)
-      await synceDatabase(store.dispatch)
+      await syncsDatabase(store.dispatch)
       this.setState({ isLoading: false })
 
     } catch (error) {
