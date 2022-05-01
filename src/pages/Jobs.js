@@ -6,6 +6,8 @@ import JobCard from "../components/jobCard/JobCard";
 import corporationLogo from '../assets/img/corporation-logo.jpg'
 
 const Jobs = () =>{
+    // get the jobs from api and drop jobsList
+    // set api for selectBox (test2)
     const jobsList=[
         {
             jobTitle : 'Senior UI/UX Designer',
@@ -63,7 +65,7 @@ const Jobs = () =>{
                 }}>
                     <Test2/>
                 </Card>
-                {jobsList.map(job => <Card sx={{
+                {jobsList.map((job,i) => <Card key={i} sx={{
                     width: '100%',
                     height: '180px',
                     padding: '33px 20px 22px 39px',
