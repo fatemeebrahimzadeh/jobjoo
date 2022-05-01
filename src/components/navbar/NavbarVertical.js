@@ -7,7 +7,32 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StepConnector from '@mui/material/StepConnector';
+import './navbarVertical.css'
+import {Stack} from "@mui/material";
 
+const navbarTitleStyle = {
+    marginTop:'5px',
+    fontFamily: 'BYekan+',
+    fontSize: '21px',
+    fontWeight: 'bold',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.38,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#4166b7'
+};
+const navbarContentStyle = {
+    fontFamily: 'BYekan+',
+    fontSize: '16px',
+    fontWeight: 'normal',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.44,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#33334c'
+}
 export default function NestedList() {
     const [jobCategoryOpen, setJobCategoryOpen] = React.useState(false);
     const [cooperationTypeOpen, setCooperationTypeOpen] = React.useState(false);
@@ -33,7 +58,10 @@ export default function NestedList() {
 
     return (
         <List
-            sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+            sx={{
+                width: '100%',
+                maxWidth: 360,
+            }}
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
@@ -41,65 +69,67 @@ export default function NestedList() {
             }
         >
             <ListItemButton onClick={jobCategoryHandleClick}>
-                {jobCategoryOpen ? <ExpandLess /> : <ExpandMore />}
-                <ListItemText sx={{textAlign:'right'}}>دسته بندی شغلی</ListItemText>
-
+                {jobCategoryOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
+                <ListItemText sx={navbarTitleStyle}>دسته بندی شغلی</ListItemText>
+                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
             </ListItemButton>
+            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
             <Collapse in={jobCategoryOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{pl: 4}}>
                         <>test</>
                     </ListItemButton>
                 </List>
             </Collapse>
-            <StepConnector/>
             <ListItemButton onClick={cooperationTypeHandleClick}>
-                {cooperationTypeOpen ? <ExpandLess /> : <ExpandMore />}
-                <ListItemText sx={{textAlign:'right'}}>نوع همکاری</ListItemText>
-
+                {cooperationTypeOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
+                <ListItemText sx={navbarTitleStyle}>نوع همکاری</ListItemText>
+                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
             </ListItemButton>
+            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
             <Collapse in={cooperationTypeOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{pl: 4}}>
                         <>test</>
                     </ListItemButton>
                 </List>
             </Collapse>
-            <StepConnector/>
             <ListItemButton onClick={adSourceHandleClick}>
-                {adSourceOpen ? <ExpandLess /> : <ExpandMore />}
-                <ListItemText sx={{textAlign:'right'}}>منبع آگهی</ListItemText>
-
+                {adSourceOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
+                <ListItemText sx={navbarTitleStyle}>منبع آگهی</ListItemText>
+                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
             </ListItemButton>
+            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
             <Collapse in={adSourceOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{pl: 4}}>
                         <>test</>
                     </ListItemButton>
                 </List>
             </Collapse>
-            <StepConnector/>
             <ListItemButton onClick={workPlaceHandleClick}>
-                {workPlaceOpen ? <ExpandLess /> : <ExpandMore />}
-                <ListItemText sx={{textAlign:'right'}}>مکان کار</ListItemText>
-
+                {workPlaceOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
+                <ListItemText sx={navbarTitleStyle}>مکان کار</ListItemText>
+                <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
             </ListItemButton>
+            <StepConnector sx={{width: '90%', margin: 'auto'}}/>
             <Collapse in={workPlaceOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{pl: 4}}>
                         <>test</>
                     </ListItemButton>
                 </List>
             </Collapse>
-            <StepConnector/>
             <ListItemButton onClick={contractTypeHandleClick}>
-                {contractTypeOpen ? <ExpandLess /> : <ExpandMore />}
-                <ListItemText sx={{textAlign:'right'}}>نوع قرارداد</ListItemText>
-
+                {contractTypeOpen ? <ExpandLess sx={{color: '#4166b7'}}/> : <ExpandMore sx={{color: '#4166b7'}}/>}
+                <Stack  sx={{marginRight:'-200px'}}>
+                    <ListItemText sx={navbarTitleStyle}>نوع قرارداد</ListItemText>
+                    <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                </Stack>
             </ListItemButton>
             <Collapse in={contractTypeOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{pl: 4}}>
                         <>test</>
                     </ListItemButton>
                 </List>
