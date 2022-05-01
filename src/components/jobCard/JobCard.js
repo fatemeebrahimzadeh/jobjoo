@@ -5,6 +5,56 @@ import corporationIc from '../../assets/icons/ic-corpo.png'
 import cityIc from '../../assets/icons/ic-pin.png'
 import {useState} from "react";
 
+const requestDateStyle= {
+    marginTop:'3px',
+    marginRight:'13px',
+    fontFamily: 'BYekan+',
+    fontSize: '14px',
+    fontWeight: 'normal',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.43,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#33334c'
+};
+const titleStyle= {
+    fontFamily: 'BYekan+',
+    fontSize: '21px',
+    fontWeight: 'bold',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.38,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#4166b7'};
+const corporationStyle = {
+    marginTop: '11px',
+    marginRight: '5px',
+    fontFamily: 'BYekan+',
+    fontSize: '18px',
+    fontWeight: 'normal',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.67,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#33334c'
+};
+const cityStyle = {
+    marginTop: '11px',
+    marginRight: '5px',
+    paddingBottom:'10px',
+    fontFamily: 'BYekan+',
+    fontSize: '18px',
+    fontWeight: 'normal',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 1.67,
+    letterSpacing: 'normal',
+    textAlign: 'right',
+    color: '#33334c'
+}
 const JobCard = ({jobDetails}) => {
     const [saveJob ,setSaveJob] = useState(false);
     const jobDetail = {
@@ -26,61 +76,15 @@ const JobCard = ({jobDetails}) => {
             </Grid>
             <Grid item xs={8}>
                 <Grid container justifyContent='end'>
-                    <Grid item sx={{
-                        marginTop:'3px',
-                        marginRight:'13px',
-                        fontFamily: 'BYekan+',
-                        fontSize: '14px',
-                        fontWeight: 'normal',
-                        fontStretch: 'normal',
-                        fontStyle: 'normal',
-                        lineHeight: 1.43,
-                        letterSpacing: 'normal',
-                        textAlign: 'right',
-                        color: '#33334c'
-                    }}>{jobDetail.requestDate}</Grid>
-                    <Grid item sx={{
-                        fontFamily: 'BYekan+',
-                        fontSize: '21px',
-                        fontWeight: 'bold',
-                        fontStretch: 'normal',
-                        fontStyle: 'normal',
-                        lineHeight: 1.38,
-                        letterSpacing: 'normal',
-                        textAlign: 'right',
-                        color: '#4166b7'}}>{jobDetail.jobTitle}</Grid>
+                    <Grid item sx={requestDateStyle}>{jobDetail.requestDate}</Grid>
+                    <Grid item sx={titleStyle}>{jobDetail.jobTitle}</Grid>
                 </Grid>
                 <Grid container justifyContent='end'>
-                    <Grid item sx={{
-                        marginTop: '11px',
-                        marginRight: '5px',
-                        fontFamily: 'BYekan+',
-                        fontSize: '18px',
-                        fontWeight: 'normal',
-                        fontStretch: 'normal',
-                        fontStyle: 'normal',
-                        lineHeight: 1.67,
-                        letterSpacing: 'normal',
-                        textAlign: 'right',
-                        color: '#33334c'
-                    }}>{jobDetail.faCorporation} | {jobDetail.enCorporation}</Grid>
+                    <Grid item sx={corporationStyle}>{jobDetail.faCorporation} | {jobDetail.enCorporation}</Grid>
                     <Grid item sx={{marginTop: '15px'}}><img src={corporationIc}/></Grid>
                 </Grid>
                 <Grid container justifyContent='end'>
-                    <Grid item sx={{
-                        marginTop: '11px',
-                        marginRight: '5px',
-                        paddingBottom:'10px',
-                        fontFamily: 'BYekan+',
-                        fontSize: '18px',
-                        fontWeight: 'normal',
-                        fontStretch: 'normal',
-                        fontStyle: 'normal',
-                        lineHeight: 1.67,
-                        letterSpacing: 'normal',
-                        textAlign: 'right',
-                        color: '#33334c'
-                    }}>{jobDetail.city}</Grid>
+                    <Grid item sx={cityStyle}>{jobDetail.city}</Grid>
                     <Grid item sx={{marginTop: '15px'}}><img src={cityIc}/></Grid>
                 </Grid>
             </Grid>
