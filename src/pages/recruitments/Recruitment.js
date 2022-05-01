@@ -1,8 +1,10 @@
 import {Card, Grid, Stack, Typography} from "@mui/material";
 import RecruitmentSpecification from "../../components/recruitmentSpecification/RecruitmentSpecification";
+import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
 
 const titleStyle = {
     marginBottom: '15px',
+    marginRight:'20px',
     fontFamily: 'BYekan+',
     fontSize: '30px',
     fontWeight: 'bold',
@@ -23,7 +25,7 @@ const Recruitment = () => {
                 <Stack>
                     <RecruitmentSpecification/>
                     <Typography sx={titleStyle}>آگهی‌های مشابه</Typography>
-                    <Card>f</Card>
+                    <SimilarRecruitment/>
                 </Stack>
             </Grid>
         </Grid>

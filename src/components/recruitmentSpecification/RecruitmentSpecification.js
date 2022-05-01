@@ -4,7 +4,8 @@ const RecruitmentSpecification = () => {
     const cardStyle = {
         width: '100%',
         height: '100%',
-        margin: ' 68px 101px 56px 10px',
+        marginTop: ' 68px',
+        marginBottom: '56px',
         padding: '34px 20px 43px 130px',
         borderRadius: '15px',
         borderColor: 'rgba(112, 112, 112, 0.25)',

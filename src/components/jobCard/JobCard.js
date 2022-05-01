@@ -4,6 +4,7 @@ import saveIc from '../../assets/icons/ic-save-black.png'
 import corporationIc from '../../assets/icons/ic-corpo.png'
 import cityIc from '../../assets/icons/ic-pin.png'
 import {useState} from "react";
+import './jobCard.css'
 
 const requestDateStyle= {
     marginTop:'3px',

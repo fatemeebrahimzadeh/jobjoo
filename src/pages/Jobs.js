@@ -1,6 +1,5 @@
 import {Card, Grid} from "@mui/material";
 import Test2 from "../components/test/Test2";
-import './jobs.css'
 import NavbarVertical from '../components/navbar/NavbarVertical'
 import JobCard from "../components/jobCard/JobCard";
 import corporationLogo from '../assets/img/corporation-logo.jpg'
