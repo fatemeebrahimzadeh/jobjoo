@@ -132,17 +132,11 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region Box
 
     searchOnClickHandler = async () => {
-<<<<<<< HEAD
-        // let ranges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
-        // let ranges = await Axios.post('/api/data/ranges')
-        // return ranges.data
-=======
         // let renges = await Axios.get<any, AxiosResponse<IRanges>>('/api/data/ranges')
         let respone = await Axios.post('/api/search/recruiment/Home/', {
             // data
         })
         // return renges.data
->>>>>>> fateme-ebrahimzade
         // should to go to second page
         // spinner
     }
