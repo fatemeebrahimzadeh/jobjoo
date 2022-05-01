@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
-import Jobs from "../pages/Jobs";
 
 const Loadable = (Component) => (props) => {
 
@@ -19,6 +18,10 @@ export default function Router() {
         {
             path: 'jobs',
             element: <JobsPage />
+        },
+        {
+            path: 'recruitment',
+            element: <RecruitmentPage />
         },
         {
             path: 'test2',
@@ -72,7 +75,7 @@ const Test = Loadable(lazy(() => import('../components/test/Test')));
 // const Register = Loadable(lazy(() => import('../components/test/Test')));
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
-const Recruitment = Loadable(lazy(() => import('../pages/recruitment/Recruitment')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 const JobsPage = Loadable(lazy(() => import('../pages/Jobs')));
+const RecruitmentPage = Loadable(lazy(() => import('../pages/recruitments/Recruitment')));
 const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
