@@ -157,12 +157,16 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region Box
 
     searchOnClickHandler = async () => {
-        let response = await Axios.post('/api/search/recruiment/1/', {
+        let response = this.state.data.jobTitle ? await Axios.post('/api/search/recruiment/1/', {
             search: this.state.data.jobTitle,
-            province: this.state.data.provinces,
-            category: this.state.data.categories
+            province: this.state.data.provinces?.name,
+            category: this.state.data.categories?.name
+        }) : await Axios.post('/api/search/recruiment/1/', {
+            province: this.state.data.provinces?.name,
+            category: this.state.data.categories?.name
         })
-        // console.log("response", response)
+
+        console.log("response", response)
         // this.props.history.push('/jobs');
         // spinner
     }
