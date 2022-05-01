@@ -5,6 +5,7 @@ import "./RecruitmentBreif.scss"
 export default class similarRecruitment extends Component {
     render() {
         return (
+            {/* <div className="similarRecruitment"></div> */ }
             <></>
         )
     }
