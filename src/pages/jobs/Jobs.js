@@ -1,10 +1,11 @@
 
-import CustomBox from "../components/box/Box";
+import CustomBox from "../../components/box/Box";
 import { Card, Grid } from "@mui/material";
-import NavbarVertical from '../components/navbar/NavbarVertical'
-import JobCard from "../components/jobCard/JobCard";
-import corporationLogo from '../assets/img/corporation-logo.jpg'
+import NavbarVertical from '../../components/navbar/NavbarVertical'
+import JobCard from "../../components/jobCard/JobCard";
+import corporationLogo from '../../assets/img/corporation-logo.jpg'
 import { connect } from "react-redux";
+import "./Jobs.scss"
 
 const Jobs = (props) => {
     // get the jobs from api and drop jobsList
@@ -53,11 +54,11 @@ const Jobs = (props) => {
         },
     ];
 
-    let insurnaceSelectOptopns = props.ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
+    // let insurnaceSelectOptopns = props.ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
+    // let cooperationSelectOptopns = props.ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
+    // let educationSelectOptopns = props.ranges.homes.education.map((option, index) => { return { name: option, id: index } })
+    // let genderSelectOptopns = props.ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
     let categoriesSelectOptopns = props.ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
-    let cooperationSelectOptopns = props.ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
-    let educationSelectOptopns = props.ranges.homes.education.map((option, index) => { return { name: option, id: index } })
-    let genderSelectOptopns = props.ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
 
     const boxElements = [
         {
@@ -66,42 +67,6 @@ const Jobs = (props) => {
             options: props.ranges.provinces,
             width: "190px",
             fieldName: "provinces"
-        },
-        {
-            type: "experienceComponent",
-            label: "سابقه کار",
-            payload: { min: props.ranges.homes.min_experience, max: props.ranges.homes.max_experience },
-            width: "110px"
-        },
-        {
-            type: "salaryComponent",
-            label: "حقوق",
-            payload: { min: props.ranges.homes.min_salary, max: props.ranges.homes.max_salary },
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "بیمه",
-            options: insurnaceSelectOptopns,
-            width: "110px"
-        },
-        {
-            type: "Select",
-            label: "جنسیت",
-            options: genderSelectOptopns,
-            width: "120px"
-        },
-        {
-            type: "Select",
-            label: "وضعیت تحصیل",
-            options: educationSelectOptopns,
-            width: "120px"
-        },
-        {
-            type: "Select",
-            label: "نوع قرارداد",
-            options: cooperationSelectOptopns,
-            width: "120px"
         },
         {
             type: "Select",
@@ -149,7 +114,10 @@ const Jobs = (props) => {
                     borderColor: 'rgba(112, 112, 112, 0.39)',
                     backgroundColor: '#fff',
                 }}>
-                    <CustomBox boxElements={boxElements} searchOnClickHandler={searchOnClickHandler} onChangeHandler={onChangeHandler} />
+                    <CustomBox
+                        boxElements={boxElements}
+                        searchOnClickHandler={searchOnClickHandler}
+                        onChangeHandler={onChangeHandler} />
                 </Card>
                 {jobsList.map((job, i) => <Card key={i} sx={{
                     width: '100%',

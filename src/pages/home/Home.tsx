@@ -162,7 +162,10 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} onChangeHandler={this.onChangeHandler} />
+                    <Box
+                        boxElements={this.boxElements}
+                        searchOnClickHandler={this.searchOnClickHandler}
+                        onChangeHandler={this.onChangeHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>

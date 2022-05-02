@@ -76,6 +76,6 @@ const Test = Loadable(lazy(() => import('../components/test/Test')));
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
-const JobsPage = Loadable(lazy(() => import('../pages/Jobs')));
+const JobsPage = Loadable(lazy(() => import('../pages/jobs/Jobs')));
 const RecruitmentPage = Loadable(lazy(() => import('../pages/recruitments/Recruitment')));
 const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
