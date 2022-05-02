@@ -49,13 +49,6 @@ export default class Box extends Component<IProps> {
                     </IconButton>
                 </Link>
                 {boxElements}
-                {/* <Autocomplete
-                    sx={{ width: 150 }}
-                    id="clear-on-escape"
-                    clearOnEscape
-                    renderInput={(params) => (
-                        <TextField {...params} label="عنوان" variant="standard" />
-                    )} options={[]}                /> */}
             </ButtonGroup>
         )
     }

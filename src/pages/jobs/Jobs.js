@@ -5,6 +5,7 @@ import NavbarVertical from '../../components/navbar/NavbarVertical'
 import JobCard from "../../components/jobCard/JobCard";
 import corporationLogo from '../../assets/img/corporation-logo.jpg'
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import "./Jobs.scss"
 
 const Jobs = (props) => {
@@ -119,17 +120,19 @@ const Jobs = (props) => {
                         searchOnClickHandler={searchOnClickHandler}
                         onChangeHandler={onChangeHandler} />
                 </Card>
-                {jobsList.map((job, i) => <Card key={i} sx={{
-                    width: '100%',
-                    height: '180px',
-                    padding: '33px 20px 22px 39px',
-                    marginTop: '15px',
-                    borderRadius: '15px',
-                    borderColor: 'rgba(112, 112, 112, 0.25)',
-                    backgroundColor: '#fff'
-                }}>
-                    <JobCard jobDetails={job} />
-                </Card>)}
+                {jobsList.map((job, i) => <Link to="/recruitment" >
+                    <Card key={i} sx={{
+                        width: '100%',
+                        height: '180px',
+                        padding: '33px 20px 22px 39px',
+                        marginTop: '15px',
+                        borderRadius: '15px',
+                        borderColor: 'rgba(112, 112, 112, 0.25)',
+                        backgroundColor: '#fff'
+                    }}>
+                        <JobCard jobDetails={job} />
+                    </Card>
+                </Link>)}
             </Grid>
             <Grid item xs={3}>
                 <Card sx={{
