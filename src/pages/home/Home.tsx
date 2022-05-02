@@ -11,6 +11,8 @@ import { IAppState } from "../../store/configureStore";
 import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
 import { Axios } from "../../utils/axios";
+import { IRecruiments } from "../../@types/entities/recruiment";
+import { setRecruimentsAction } from "../../store/actions/recruiment";
 
 let companyLogos: {
     img: string
@@ -55,8 +57,7 @@ interface IState {
 
 interface IProps { }
 
-// class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
-class Home extends Component<IProps & ILinkStateToProps, IState> {
+class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
 
     boxElements: IBoxOption[] = []
     defaultData: IHomeDate = {
@@ -117,18 +118,18 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region Box
 
     searchOnClickHandler = async () => {
-        let response = this.state.data.jobTitle ? await Axios.post('/api/search/recruiment/1/', {
+        let response = this.state.data.jobTitle ? await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
             search: this.state.data.jobTitle,
             province: this.state.data.provinces?.name,
             category: this.state.data.categories?.name
-        }) : await Axios.post('/api/search/recruiment/1/', {
+        }) : await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
             province: this.state.data.provinces?.name,
             category: this.state.data.categories?.name
         })
 
         console.log("response", response)
+        this.props.SET_RECRUIMENTS(response)
         // spinner
-        // redux
     }
 
     onChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>) => {
@@ -182,12 +183,12 @@ function mapStateToProps(state: IAppState): ILinkStateToProps {
 }
 
 interface ILinkDispatchToProps {
-    // ADD_ROLE: (role: IRole) => void
+    SET_RECRUIMENTS: (recruiment: IRecruiments) => void
 }
 
 function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
     return {
-        // ADD_ROLE: (role: IRole) => { dispatch(AddRoleAction(role)) }
+        SET_RECRUIMENTS: (recruiment: IRecruiments) => { dispatch(setRecruimentsAction(recruiment)) }
     }
 }
 
