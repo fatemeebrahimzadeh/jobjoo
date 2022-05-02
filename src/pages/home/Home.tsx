@@ -11,7 +11,6 @@ import { IAppState } from "../../store/configureStore";
 import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
 import { Axios } from "../../utils/axios";
-import { AxiosResponse } from "axios";
 
 let companyLogos: {
     img: string
@@ -56,6 +55,7 @@ interface IState {
 
 interface IProps { }
 
+// class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
 class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     boxElements: IBoxOption[] = []
@@ -86,10 +86,10 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     componentDidMount() {
         let { ranges } = this.props
+        this.setState({ ranges })
 
         let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
 
-        this.setState({ ranges })
         this.boxElements = [
             {
                 type: "Select",
@@ -127,8 +127,8 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         })
 
         console.log("response", response)
-        // this.props.history.push('/jobs');
         // spinner
+        // redux
     }
 
     onChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>) => {
@@ -144,8 +144,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#endregion
 
     render() {
-
-        // console.log("[Home]", this.state.data)
 
         let companyLogosImage = companyLogos.map((companyLogo, index) => {
             return <a
@@ -183,4 +181,14 @@ function mapStateToProps(state: IAppState): ILinkStateToProps {
     return { ranges: state.ranges }
 }
 
-export default connect(mapStateToProps)(Home)
+interface ILinkDispatchToProps {
+    // ADD_ROLE: (role: IRole) => void
+}
+
+function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
+    return {
+        // ADD_ROLE: (role: IRole) => { dispatch(AddRoleAction(role)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Home)

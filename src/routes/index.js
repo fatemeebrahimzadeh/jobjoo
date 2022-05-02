@@ -2,13 +2,13 @@ import React, { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 
 const Loadable = (Component) => (props) => {
-
     return (
         <Suspense fallback={<p>loading...</p>}>
             <Component {...props} />
         </Suspense>
     );
 };
+
 export default function Router() {
     return useRoutes([
         {

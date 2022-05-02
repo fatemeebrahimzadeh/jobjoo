@@ -3,6 +3,7 @@ import "./Box.scss"
 import { Autocomplete, Button, ButtonGroup, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { IHomeDate } from "../../pages/home/Home";
+import { Link } from "react-router-dom";
 
 export interface IBoxOption {
     type: "Select" | "TextField"
@@ -42,9 +43,11 @@ export default class Box extends Component<IProps> {
 
         return (
             <ButtonGroup className="Box" variant="contained" aria-label="outlined primary button group">
-                <IconButton className="Box__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
+                <Link to="/jobs" >
+                    <IconButton className="Box__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                </Link>
                 {boxElements}
                 {/* <Autocomplete
                     sx={{ width: 150 }}
