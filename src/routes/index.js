@@ -1,9 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+import Spinner from '../components/UI/spinner/Spinner';
 
 const Loadable = (Component) => (props) => {
     return (
-        <Suspense fallback={<p>loading...</p>}>
+        <Suspense fallback={<Spinner isLoading />}>
             <Component {...props} />
         </Suspense>
     );
