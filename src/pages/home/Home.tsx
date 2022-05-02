@@ -11,7 +11,8 @@ import { IAppState } from "../../store/configureStore";
 import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
 import { Axios } from "../../utils/axios";
-import { AxiosResponse } from "axios";
+import { IRecruiments } from "../../@types/entities/recruiment";
+import { setRecruimentsAction } from "../../store/actions/recruiment";
 
 let companyLogos: {
     img: string
@@ -56,7 +57,7 @@ interface IState {
 
 interface IProps { }
 
-class Home extends Component<IProps & ILinkStateToProps, IState> {
+class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
 
     boxElements: IBoxOption[] = []
     defaultData: IHomeDate = {
@@ -86,14 +87,10 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     componentDidMount() {
         let { ranges } = this.props
-
-        let insurnaceSelectOptopns = ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
-        let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
-        let cooperationSelectOptopns = ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
-        let educationSelectOptopns = ranges.homes.education.map((option, index) => { return { name: option, id: index } })
-        let genderSelectOptopns = ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
-
         this.setState({ ranges })
+
+        let categoriesSelectOptopns = ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
+
         this.boxElements = [
             {
                 type: "Select",
@@ -102,42 +99,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 width: "190px",
                 fieldName: "provinces"
             },
-            // {
-            //     type: "experienceComponent",
-            //     label: "سابقه کار",
-            //     payload: { min: ranges.homes.min_experience, max: ranges.homes.max_experience },
-            //     width: "110px"
-            // },
-            // {
-            //     type: "salaryComponent",
-            //     label: "حقوق",
-            //     payload: { min: ranges.homes.min_salary, max: ranges.homes.max_salary },
-            //     width: "110px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "بیمه",
-            //     options: insurnaceSelectOptopns,
-            //     width: "110px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "جنسیت",
-            //     options: genderSelectOptopns,
-            //     width: "120px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "وضعیت تحصیل",
-            //     options: educationSelectOptopns,
-            //     width: "120px"
-            // },
-            // {
-            //     type: "Select",
-            //     label: "نوع قرارداد",
-            //     options: cooperationSelectOptopns,
-            //     width: "120px"
-            // },
             {
                 type: "Select",
                 label: "دسته بندی شغلی",
@@ -157,13 +118,17 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
     //#region Box
 
     searchOnClickHandler = async () => {
-        let response = await Axios.post('/api/search/recruiment/1/', {
+        let response = this.state.data.jobTitle ? await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
             search: this.state.data.jobTitle,
-            province: this.state.data.provinces,
-            category: this.state.data.categories
+            province: this.state.data.provinces?.name,
+            category: this.state.data.categories?.name
+        }) : await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
+            province: this.state.data.provinces?.name,
+            category: this.state.data.categories?.name
         })
-        // console.log("response", response)
-        // this.props.history.push('/jobs');
+
+        console.log("response", response)
+        this.props.SET_RECRUIMENTS(response)
         // spinner
     }
 
@@ -181,8 +146,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     render() {
 
-        // console.log("[Home]", this.state.data)
-
         let companyLogosImage = companyLogos.map((companyLogo, index) => {
             return <a
                 key={index} href={companyLogo.linkAddress}>
@@ -198,7 +161,10 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                 <section className="searchSection">
                     <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
                     <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <Box boxElements={this.boxElements} searchOnClickHandler={this.searchOnClickHandler} onChangeHandler={this.onChangeHandler} />
+                    <Box
+                        boxElements={this.boxElements}
+                        searchOnClickHandler={this.searchOnClickHandler}
+                        onChangeHandler={this.onChangeHandler} />
                     <div className="companyLogos">
                         {companyLogosImage}
                     </div>
@@ -216,4 +182,14 @@ function mapStateToProps(state: IAppState): ILinkStateToProps {
     return { ranges: state.ranges }
 }
 
-export default connect(mapStateToProps)(Home)
+interface ILinkDispatchToProps {
+    SET_RECRUIMENTS: (recruiment: IRecruiments) => void
+}
+
+function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
+    return {
+        SET_RECRUIMENTS: (recruiment: IRecruiments) => { dispatch(setRecruimentsAction(recruiment)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Home)
