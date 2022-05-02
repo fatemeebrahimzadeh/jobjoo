@@ -120,8 +120,8 @@ const Jobs = (props) => {
                         searchOnClickHandler={searchOnClickHandler}
                         onChangeHandler={onChangeHandler} />
                 </Card>
-                {jobsList.map((job, i) => <Link to="/recruitment" >
-                    <Card key={i} sx={{
+                {jobsList.map((job, i) => <Link to="/recruitment" key={i} >
+                    <Card  sx={{
                         width: '100%',
                         height: '180px',
                         padding: '33px 20px 22px 39px',

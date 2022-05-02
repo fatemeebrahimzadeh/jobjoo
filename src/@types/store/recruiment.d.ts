@@ -1,12 +1,12 @@
-export const SET_RECRUIMENT = 'SET_RECRUIMENT'
+export const SET_RECRUIMENTS = 'SET_RECRUIMENTS'
 
 export interface iSETRECRUIMENTS {
 
     type: typeof SET_RECRUIMENTS
     payload: {
-        recruiments: IRecruiments
+        recruiments: IRecruiment[]
     }
 
 }
 
-export type IRecruimentsActions = iSETRECRUIMENT 
+export type IRecruimentsActions = iSETRECRUIMENTS 

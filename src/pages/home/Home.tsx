@@ -11,8 +11,9 @@ import { IAppState } from "../../store/configureStore";
 import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
 import { Axios } from "../../utils/axios";
-import { IRecruiments } from "../../@types/entities/recruiment";
+import { IRecruiment } from "../../@types/entities/recruiment";
 import { setRecruimentsAction } from "../../store/actions/recruiment";
+import { AxiosResponse } from "axios";
 
 let companyLogos: {
     img: string
@@ -118,18 +119,17 @@ class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, 
     //#region Box
 
     searchOnClickHandler = async () => {
-        let response = this.state.data.jobTitle ? await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
+        let response = this.state.data.jobTitle ? await Axios.post<any, AxiosResponse<{ result: IRecruiment[] }>>('/api/search/recruiment/1/', {
             search: this.state.data.jobTitle,
             province: this.state.data.provinces?.name,
             category: this.state.data.categories?.name
-        }) : await Axios.post<any, IRecruiments>('/api/search/recruiment/1/', {
+        }) : await Axios.post<any, AxiosResponse<{ result: IRecruiment[] }>>('/api/search/recruiment/1/', {
             province: this.state.data.provinces?.name,
             category: this.state.data.categories?.name
         })
 
         console.log("response", response)
-        this.props.SET_RECRUIMENTS(response)
-        // spinner
+        this.props.SET_RECRUIMENTS(response.data.result)
     }
 
     onChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>) => {
@@ -183,12 +183,12 @@ function mapStateToProps(state: IAppState): ILinkStateToProps {
 }
 
 interface ILinkDispatchToProps {
-    SET_RECRUIMENTS: (recruiment: IRecruiments) => void
+    SET_RECRUIMENTS: (recruiments: IRecruiment[]) => void
 }
 
 function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
     return {
-        SET_RECRUIMENTS: (recruiment: IRecruiments) => { dispatch(setRecruimentsAction(recruiment)) }
+        SET_RECRUIMENTS: (recruiments: IRecruiment[]) => { dispatch(setRecruimentsAction(recruiments)) }
     }
 }
 

@@ -1,4 +1,4 @@
-export interface IRecruiments {
+export interface IRecruiment {
     source: [
         0
     ],

@@ -1,13 +1,12 @@
-import { IRecruiments } from "../../@types/entities/recruiment";
+import { IRecruiment } from "../../@types/entities/recruiment";
 import { IRecruimentsActions } from "../../@types/store/recruiment";
 
-const initialState: IRecruiments[] = []
+const initialState: IRecruiment[] = []
 
-export const recruimentReducer = (state: IRecruiments[] = initialState, action: IRecruimentsActions) => {
+export const recruimentsReducer = (state: IRecruiment[] = initialState, action: IRecruimentsActions) => {
     switch (action.type) {
         case "SET_RECRUIMENTS":
-            console.log(action.payload.recruiment)
-            return action.payload.recruiment;
+            return action.payload.recruiments;
     }
     return state
 }
