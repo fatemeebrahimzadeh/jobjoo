@@ -103,7 +103,7 @@ const RecruitmentBrief = () => {
                 <Grid item sx={{marginTop: '15px'}}><img src={cityIc}/></Grid>
             </Grid>
             <Typography sx={requestDateStyle}>{job.requestDate}</Typography>
-            <Button sx={buttonStyle}>مشاهذع آگهی در جابینجا</Button>
+            <Button sx={buttonStyle}>مشاهده آگهی در جابینجا</Button>
         </Card>
     )
 }
