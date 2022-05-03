@@ -14,7 +14,7 @@ export interface ISETSELECTEDRECRUIMENT {
 
     type: typeof SET_SELECTED_RECRUIMENT
     payload: {
-        recruiment: IRecruiment
+        selectedRecruiment: IRecruiment
     }
 
 }

@@ -13,6 +13,6 @@ export const setRecruimentsAction = (recruiments: IRecruiment[]): AppAction => (
 export const setSelectedRecruimentAction = (recruiment: IRecruiment): AppAction => ({
     type: "SET_SELECTED_RECRUIMENT",
     payload: {
-        recruiment: recruiment
+        selectedRecruiment: recruiment
     }
 })

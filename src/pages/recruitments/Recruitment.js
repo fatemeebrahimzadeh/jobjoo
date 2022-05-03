@@ -1,11 +1,12 @@
-import {Card, Grid, Stack, Typography} from "@mui/material";
+import { Card, Grid, Stack, Typography } from "@mui/material";
 import RecruitmentSpecification from "../../components/recruitmentSpecification/RecruitmentSpecification";
 import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
 import RecruitmentBrief from "../../components/recruitmentBrief/RecruitmentBrief";
+import { connect } from "react-redux";
 
 const titleStyle = {
     marginBottom: '15px',
-    marginRight:'20px',
+    marginRight: '20px',
     fontFamily: 'BYekan+',
     fontSize: '30px',
     fontWeight: 'bold',
@@ -16,20 +17,28 @@ const titleStyle = {
     textAlign: 'right',
     color: '#4166b7',
 }
-const Recruitment = () => {
+const Recruitment = (props) => {
+
+    console.log(props.selectedRecruiment)
+
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <RecruitmentBrief/>
+                <RecruitmentBrief />
             </Grid>
             <Grid item xs={7}>
                 <Stack>
-                    <RecruitmentSpecification/>
+                    <RecruitmentSpecification />
                     <Typography sx={titleStyle}>آگهی‌های مشابه</Typography>
-                    <SimilarRecruitment/>
+                    <SimilarRecruitment />
                 </Stack>
             </Grid>
         </Grid>
     )
 }
-export default Recruitment;
+
+function mapStateToProps(state) {
+    return { selectedRecruiment: state.selectedRecruiment }
+}
+
+export default connect(mapStateToProps)(Recruitment);
