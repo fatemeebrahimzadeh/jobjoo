@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CustomBox from "../../components/box/Box";
 import { Card, Grid } from "@mui/material";
 import NavbarVertical from '../../components/navbar/NavbarVertical'
@@ -8,6 +8,7 @@ import corporationLogo from '../../assets/img/corporation-logo.jpg'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Axios } from "../../utils/axios";
+import { setRecruimentsAction } from "../../store/actions/recruiment"
 import "./Jobs.scss"
 
 const Jobs = (props) => {
@@ -22,7 +23,6 @@ const Jobs = (props) => {
     const [categories, setCategories] = useState(null);
 
     const jobsList = props.recruiments.map((recruiment, index) => {
-        console.log(recruiment.title)
         return (
             {
                 jobTitle: `${recruiment.title}`,
@@ -70,7 +70,7 @@ const Jobs = (props) => {
         })
 
         console.log("response", response)
-        // this.props.SET_RECRUIMENTS(response.data.result)
+        props.SET_RECRUIMENTS(response.data.result)
     }
 
     const onChangeHandler = (value, fieldName, event) => {
@@ -141,4 +141,10 @@ function mapStateToProps(state) {
     return { ranges: state.ranges, recruiments: state.recruiments }
 }
 
-export default connect(mapStateToProps)(Jobs);
+function mapDispatchtoProps(dispatch) {
+    return {
+        SET_RECRUIMENTS: (recruiments) => { dispatch(setRecruimentsAction(recruiments)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Jobs);
