@@ -1,4 +1,5 @@
 
+import React, { useState,useEffect } from "react";
 import CustomBox from "../../components/box/Box";
 import { Card, Grid } from "@mui/material";
 import NavbarVertical from '../../components/navbar/NavbarVertical'
@@ -6,60 +7,33 @@ import JobCard from "../../components/jobCard/JobCard";
 import corporationLogo from '../../assets/img/corporation-logo.jpg'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Axios } from "../../utils/axios";
 import "./Jobs.scss"
 
 const Jobs = (props) => {
-    // get the jobs from api and drop jobsList
-    // set api for selectBox (test2)
-
-    const jobsList = [
-        {
-            jobTitle: 'Senior UI/UX Designer',
-            requestDate: 'سه روز پیش',
-            enCorporation: 'Fanavaran',
-            faCorporation: 'فناوران اطلاعات خبره',
-            city: 'تهران',
-            logoSrc: corporationLogo
-        },
-        {
-            jobTitle: 'Senior UI/UX Designer',
-            requestDate: 'سه روز پیش',
-            enCorporation: 'Fanavaran',
-            faCorporation: 'فناوران اطلاعات خبره',
-            city: 'تهران',
-            logoSrc: corporationLogo
-        },
-        {
-            jobTitle: 'Senior UI/UX Designer',
-            requestDate: 'سه روز پیش',
-            enCorporation: 'Fanavaran',
-            faCorporation: 'فناوران اطلاعات خبره',
-            city: 'تهران',
-            logoSrc: corporationLogo
-        },
-        {
-            jobTitle: 'Senior UI/UX Designer',
-            requestDate: 'سه روز پیش',
-            enCorporation: 'Fanavaran',
-            faCorporation: 'فناوران اطلاعات خبره',
-            city: 'تهران',
-            logoSrc: corporationLogo
-        },
-        {
-            jobTitle: 'Senior UI/UX Designer',
-            requestDate: 'سه روز پیش',
-            enCorporation: 'Fanavaran',
-            faCorporation: 'فناوران اطلاعات خبره',
-            city: 'تهران',
-            logoSrc: corporationLogo
-        },
-    ];
 
     // let insurnaceSelectOptopns = props.ranges.homes.insurnace.map((option, index) => { return { name: option, id: index } })
     // let cooperationSelectOptopns = props.ranges.homes.cooperation.map((option, index) => { return { name: option, id: index } })
     // let educationSelectOptopns = props.ranges.homes.education.map((option, index) => { return { name: option, id: index } })
     // let genderSelectOptopns = props.ranges.homes.gender.map((option, index) => { return { name: option, id: index } })
     let categoriesSelectOptopns = props.ranges.homes.categories.map((option, index) => { return { name: option, id: index } })
+    const [provinces, setProvinces] = useState(null);
+    const [jobTitle, setJobTitle] = useState("");
+    const [categories, setCategories] = useState(null);
+
+    const jobsList = props.recruiments.map((recruiment, index) => {
+        console.log(recruiment.title)
+        return (
+            {
+                jobTitle: `${recruiment.title}`,
+                requestDate: 'سه روز پیش',
+                enCorporation: 'Fanavaran',
+                faCorporation: 'فناوران اطلاعات خبره',
+                city: `${recruiment.city}`,
+                logoSrc: corporationLogo
+            }
+        )
+    })
 
     const boxElements = [
         {
@@ -86,20 +60,33 @@ const Jobs = (props) => {
 
     const searchOnClickHandler = async () => {
 
-        // axios
-        // console.log("response", response)
-        // this.props.history.push('/jobs');
-        // spinner
+        let response = jobTitle ? await Axios.post('/api/search/recruiment/1/', {
+            search: jobTitle,
+            province: provinces?.name,
+            category: categories?.name
+        }) : await Axios.post('/api/search/recruiment/1/', {
+            province: provinces?.name,
+            category: categories?.name
+        })
+
+        console.log("response", response)
+        // this.props.SET_RECRUIMENTS(response.data.result)
     }
 
     const onChangeHandler = (value, fieldName, event) => {
-        // this.setState((prevState: IState) => ({
-        //     ...prevState,
-        //     data: {
-        //         ...prevState.data,
-        //         [fieldName]: value
-        //     }
-        // }))
+        switch (fieldName) {
+            case "provinces":
+                setProvinces(value)
+                break;
+            case "categories":
+                setCategories(value)
+                break;
+            case "jobTitle":
+                setJobTitle(value)
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -120,8 +107,8 @@ const Jobs = (props) => {
                         searchOnClickHandler={searchOnClickHandler}
                         onChangeHandler={onChangeHandler} />
                 </Card>
-                {jobsList.map((job, i) => <Link to="/recruitment" key={i} >
-                    <Card  sx={{
+                {jobsList.map((job, i) => <Link to="/recruitment" >
+                    <Card key={i} sx={{
                         width: '100%',
                         height: '180px',
                         padding: '33px 20px 22px 39px',
@@ -144,13 +131,14 @@ const Jobs = (props) => {
                 }}>
                     <NavbarVertical />
                 </Card>
+                {/* <Pagination count={10} /> */}
             </Grid>
         </Grid>
     )
 }
 
 function mapStateToProps(state) {
-    return { ranges: state.ranges }
+    return { ranges: state.ranges, recruiments: state.recruiments }
 }
 
 export default connect(mapStateToProps)(Jobs);
