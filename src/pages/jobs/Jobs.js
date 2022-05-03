@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import CustomBox from "../../components/box/Box";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, Pagination } from "@mui/material";
 import NavbarVertical from '../../components/navbar/NavbarVertical'
 import JobCard from "../../components/jobCard/JobCard";
 import corporationLogo from '../../assets/img/corporation-logo.jpg'
@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Axios } from "../../utils/axios";
 import { setRecruimentsAction } from "../../store/actions/recruiment"
+import { setSelectedRecruimentAction } from "../../store/actions/recruiment"
+
 import "./Jobs.scss"
 
 const Jobs = (props) => {
@@ -107,7 +109,7 @@ const Jobs = (props) => {
                         searchOnClickHandler={searchOnClickHandler}
                         onChangeHandler={onChangeHandler} />
                 </Card>
-                {jobsList.map((job, i) => <Link to="/recruitment" >
+                {jobsList.map((job, i) => <Link to="/recruitment" onClick={() => { console.log("onclick"); props.SET_SELECTED_RECRUIMENT(job) }} >
                     <Card key={i} sx={{
                         width: '100%',
                         height: '180px',
@@ -120,6 +122,7 @@ const Jobs = (props) => {
                         <JobCard jobDetails={job} />
                     </Card>
                 </Link>)}
+                <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }} count={10} />
             </Grid>
             <Grid item xs={3}>
                 <Card sx={{
@@ -131,7 +134,6 @@ const Jobs = (props) => {
                 }}>
                     <NavbarVertical />
                 </Card>
-                {/* <Pagination count={10} /> */}
             </Grid>
         </Grid>
     )
@@ -143,7 +145,8 @@ function mapStateToProps(state) {
 
 function mapDispatchtoProps(dispatch) {
     return {
-        SET_RECRUIMENTS: (recruiments) => { dispatch(setRecruimentsAction(recruiments)) }
+        SET_RECRUIMENTS: (recruiments) => { dispatch(setRecruimentsAction(recruiments)) },
+        SET_SELECTED_RECRUIMENT: (recruiment) => { dispatch(setSelectedRecruimentAction(recruiment)) }
     }
 }
 

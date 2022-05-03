@@ -7,6 +7,8 @@ export const recruimentsReducer = (state: IRecruiment[] = initialState, action: 
     switch (action.type) {
         case "SET_RECRUIMENTS":
             return action.payload.recruiments;
+        case "SET_SELECTED_RECRUIMENT":
+            return action.payload.recruiment;
     }
     return state
 }

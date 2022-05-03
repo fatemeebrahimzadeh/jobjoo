@@ -1,4 +1,5 @@
 export const SET_RECRUIMENTS = 'SET_RECRUIMENTS'
+export const SET_SELECTED_RECRUIMENT = 'SET_SELECTED_RECRUIMENT'
 
 export interface iSETRECRUIMENTS {
 
@@ -9,4 +10,13 @@ export interface iSETRECRUIMENTS {
 
 }
 
-export type IRecruimentsActions = iSETRECRUIMENTS 
+export interface iSETSELECTEDRECRUIMENT {
+
+    type: typeof SET_SELECTED_RECRUIMENT
+    payload: {
+        recruiment: IRecruiment
+    }
+
+}
+
+export type IRecruimentsActions = iSETRECRUIMENTS | iSETSELECTEDRECRUIMENT
