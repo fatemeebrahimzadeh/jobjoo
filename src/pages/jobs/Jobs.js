@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import CustomBox from "../../components/box/Box";
 import { Card, Grid, Pagination } from "@mui/material";
-import NavbarVertical from '../../components/navbar/NavbarVertical'
+import NavbarVertical from '../../components/navbarVertical/NavbarVertical'
 import JobCard from "../../components/jobCard/JobCard";
 import corporationLogo from '../../assets/img/corporation-logo.jpg'
 import { connect } from "react-redux";
