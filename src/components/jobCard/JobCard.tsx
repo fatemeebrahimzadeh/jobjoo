@@ -5,6 +5,8 @@ import corporationIc from '../../assets/icons/ic-corpo.png'
 import cityIc from '../../assets/icons/ic-pin.png'
 import { useState } from "react";
 import './jobCard.scss'
+import moment from "moment";
+import { IRecruiment } from "../../@types/entities/recruiment";
 
 const requestDateStyle = {
     marginTop: '3px',
@@ -19,6 +21,7 @@ const requestDateStyle = {
     textAlign: 'right',
     color: '#33334c'
 };
+
 const titleStyle = {
     fontFamily: 'BYekan',
     fontSize: '21px',
@@ -30,6 +33,7 @@ const titleStyle = {
     textAlign: 'right',
     color: '#4166b7'
 };
+
 const corporationStyle = {
     marginTop: '11px',
     marginRight: '5px',
@@ -43,6 +47,7 @@ const corporationStyle = {
     textAlign: 'right',
     color: '#33334c'
 };
+
 const cityStyle = {
     marginTop: '11px',
     marginRight: '5px',
@@ -57,18 +62,24 @@ const cityStyle = {
     textAlign: 'right',
     color: '#33334c'
 }
-const JobCard = ({ jobDetails }) => {
+
+interface IProps {
+    jobDetails: IRecruiment
+}
+
+const JobCard = (props: IProps) => {
+
     const [saveJob, setSaveJob] = useState(false);
-    const jobDetail = {
-        jobTitle: jobDetails.jobTitle,
-        requestDate: jobDetails.requestDate,
-        enCorporation: jobDetails.enCorporation,
-        faCorporation: jobDetails.faCorporation,
-        city: jobDetails.city,
-        logoSrc: jobDetails.logoSrc
-    }
+
     const saveHandler = () => {
         setSaveJob(!saveJob);
+    }
+
+    const jobDetail = {
+        jobTitle: props.jobDetails.title,
+        requestDate: moment(props.jobDetails.time).startOf('hour').fromNow(),
+        city: props.jobDetails.city,
+        logoSrc: props.jobDetails.source?.logo
     }
 
     return (<Grid container>
@@ -80,10 +91,6 @@ const JobCard = ({ jobDetails }) => {
             <Grid container justifyContent='end'>
                 <Grid item sx={requestDateStyle}>{jobDetail.requestDate}</Grid>
                 <Grid item sx={titleStyle}>{jobDetail.jobTitle}</Grid>
-            </Grid>
-            <Grid container justifyContent='end'>
-                <Grid item sx={corporationStyle}>{jobDetail.faCorporation} | {jobDetail.enCorporation}</Grid>
-                <Grid item sx={{ marginTop: '15px' }}><img src={corporationIc} /></Grid>
             </Grid>
             <Grid container justifyContent='end'>
                 <Grid item sx={cityStyle}>{jobDetail.city}</Grid>
