@@ -1,7 +1,7 @@
 import React, { Component, Dispatch } from "react";
 import "./Home.scss"
 import vector from "../../assets/img/vector.png"
-import Box, { IBoxOption } from "../../components/box/Box";
+import CustomBox, { IBoxOption } from "../../components/box/Box";
 import iranEstekhdamLogo from "../../assets/img/iranEstekhdamLogo.png"
 import jobinjaLogo from "../../assets/img/jobinjaLogo.png"
 import jobvisionLogo from "../../assets/img/jobvisionLogo.png"
@@ -12,8 +12,12 @@ import { IRanges } from "../../@types/entities/ranges";
 import { AppAction } from "../../@types/store";
 import { Axios } from "../../utils/axios";
 import { IRecruiment } from "../../@types/entities/recruiment";
-import { setRecruimentsAction } from "../../store/actions/recruiment";
+// import { setRecruimentsAction } from "../../store/actions/recruiment";
 import { AxiosResponse } from "axios";
+import { Card, Grid, Pagination } from "@mui/material";
+import JobCard from "../../components/jobCard/JobCard";
+import { Link } from "react-router-dom";
+import NavbarVertical from "../../components/navbarVertical/NavbarVertical";
 
 let companyLogos: {
     img: string
@@ -54,20 +58,23 @@ export interface IHomeDate {
 interface IState {
     ranges: IRanges
     data: IHomeDate
+    mode: "Home" | "recruiments"
 }
 
 interface IProps { }
 
-class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
+// class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, IState> {
+class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     boxElements: IBoxOption[] = []
+    jobsList: IRecruiment[] = []
     defaultData: IHomeDate = {
         provinces: null,
         jobTitle: "",
         categories: null
     }
 
-    state = {
+    state: IState = {
         ranges: {
             homes: {
                 name: "",
@@ -83,7 +90,8 @@ class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, 
             },
             provinces: []
         },
-        data: this.defaultData
+        data: this.defaultData,
+        mode: "Home"
     }
 
     componentDidMount() {
@@ -129,7 +137,9 @@ class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, 
         })
 
         console.log("response", response)
-        this.props.SET_RECRUIMENTS(response.data.result)
+        // this.props.SET_RECRUIMENTS(response.data.result)
+        this.jobsList = response.data.result
+        this.setState({ mode: "recruiments" })
     }
 
     onChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>) => {
@@ -154,22 +164,73 @@ class Home extends Component<IProps & ILinkStateToProps & ILinkDispatchToProps, 
         })
 
         return (
-            <main className="HomePage">
-                <div className="homeImg">
-                    <img src={vector} alt="vector" />
-                </div>
-                <section className="searchSection">
-                    <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
-                    <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
-                    <Box
-                        boxElements={this.boxElements}
-                        searchOnClickHandler={this.searchOnClickHandler}
-                        onChangeHandler={this.onChangeHandler} />
-                    <div className="companyLogos">
-                        {companyLogosImage}
-                    </div>
-                </section>
-            </main>
+            <>
+                {this.state.mode === "Home" ? (
+                    <main className="HomePage">
+                        <div className="homeImg">
+                            <img src={vector} alt="vector" />
+                        </div>
+                        <section className="searchSection">
+                            <h1>جابجو بزرگترین سامانه جست‌و‌جوی آگهی استخدام </h1>
+                            <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
+                            <CustomBox
+                                boxElements={this.boxElements}
+                                searchOnClickHandler={this.searchOnClickHandler}
+                                onChangeHandler={this.onChangeHandler} />
+                            <div className="companyLogos">
+                                {companyLogosImage}
+                            </div>
+                        </section>
+                    </main>
+                ) : (
+                    <Grid container spacing={10} justifyContent='center'>
+                        <Grid item xs={6}>
+                            <Card sx={{
+                                width: '100%',
+                                height: '62px',
+                                marginTop: '44px',
+                                marginBottom: '25px',
+                                borderRadius: '15px',
+                                border: '1px',
+                                borderColor: 'rgba(112, 112, 112, 0.39)',
+                                backgroundColor: '#fff',
+                            }}>
+                                <CustomBox
+                                    boxElements={this.boxElements}
+                                    searchOnClickHandler={this.searchOnClickHandler}
+                                    onChangeHandler={this.onChangeHandler} />
+                            </Card>
+                            {this.jobsList.map((job, i) =>
+                                <Link to="/recruitment" onClick={() => { }} >
+                                    <Card key={i} sx={{
+                                        width: '100%',
+                                        height: '180px',
+                                        padding: '33px 20px 22px 39px',
+                                        marginTop: '15px',
+                                        borderRadius: '15px',
+                                        borderColor: 'rgba(112, 112, 112, 0.25)',
+                                        backgroundColor: '#fff'
+                                    }}>
+                                        <JobCard jobDetails={job} />
+                                    </Card>
+                                </Link>)}
+                            <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }} count={10} />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Card sx={{
+                                marginTop: '44px',
+                                padding: '31px 16.4px 40px 21.5px',
+                                borderRadius: '15px',
+                                borderColor: 'rgba(112, 112, 112, 0.25)',
+                                backgroundColor: '#fff'
+                            }}>
+                                <NavbarVertical />
+                            </Card>
+                        </Grid>
+                    </Grid>
+                )
+                }
+            </>
         )
     }
 }
@@ -182,14 +243,15 @@ function mapStateToProps(state: IAppState): ILinkStateToProps {
     return { ranges: state.ranges }
 }
 
-interface ILinkDispatchToProps {
-    SET_RECRUIMENTS: (recruiments: IRecruiment[]) => void
-}
+// interface ILinkDispatchToProps {
+//     SET_RECRUIMENTS: (recruiments: IRecruiment[]) => void
+// }
 
-function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
-    return {
-        SET_RECRUIMENTS: (recruiments: IRecruiment[]) => { dispatch(setRecruimentsAction(recruiments)) }
-    }
-}
+// function mapDispatchtoProps(dispatch: Dispatch<AppAction>) {
+//     return {
+//         SET_RECRUIMENTS: (recruiments: IRecruiment[]) => { dispatch(setRecruimentsAction(recruiments)) }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Home)
+// export default connect(mapStateToProps, mapDispatchtoProps)(Home)
+export default connect(mapStateToProps)(Home)

@@ -43,11 +43,9 @@ export default class Box extends Component<IProps> {
 
         return (
             <ButtonGroup className="Box" variant="contained" aria-label="outlined primary button group">
-                <Link to="/jobs" >
-                    <IconButton className="Box__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Link>
+                <IconButton className="Box__btn" onClick={this.props.searchOnClickHandler} aria-label="search">
+                    <SearchIcon />
+                </IconButton>
                 {boxElements}
             </ButtonGroup>
         )
