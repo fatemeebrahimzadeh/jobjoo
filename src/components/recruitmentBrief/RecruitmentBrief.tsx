@@ -76,21 +76,12 @@ const buttonStyle = {
     borderRadius: '10px',
     backgroundColor: '#4166b7',
 }
-const job = {
-    jobTitle: 'Senior UI/UX Designer',
-    requestDate: 'سه روز پیش',
-    enCorporation: 'Fanavaran',
-    faCorporation: 'فناوران اطلاعات خبره',
-    city: 'تهران',
-    logoSrc: corporationLogo
-}
 
 interface IProps {
     title: string
     cooperation: string
-    neighbourhood: string
     province: string
-    time: number
+    time: Date
     url: string
 }
 
@@ -105,17 +96,17 @@ const RecruitmentBrief = (props: IProps) => {
         <Card sx={cardStyle}>
             {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler} />}
             {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={saveHandler} />}
-            <Typography sx={titleStyle}>{job.jobTitle}</Typography>
+            <Typography sx={titleStyle}>{props.title}</Typography>
             <Grid container justifyContent='end'>
-                <Grid item sx={corporationStyle}>{job.faCorporation} | {job.enCorporation}</Grid>
+                <Grid item sx={corporationStyle}>{props.cooperation}</Grid>
                 <Grid item sx={{ marginTop: '15px' }}><img src={corporationIc} /></Grid>
             </Grid>
             <Grid container justifyContent='end'>
-                <Grid item sx={cityStyle}>{job.city}</Grid>
+                <Grid item sx={cityStyle}>{props.province}</Grid>
                 <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
             </Grid>
-            <Typography sx={requestDateStyle}>{job.requestDate}</Typography>
-            <Button sx={buttonStyle}>مشاهده آگهی در جابینجا</Button>
+            {/* <Typography sx={requestDateStyle}>{props.ti}</Typography> */}
+            <Button sx={buttonStyle}><a href={props.url} target="_blank" > مشاهده آگهی در جابینجا </a> </Button>
         </Card>
     )
 }

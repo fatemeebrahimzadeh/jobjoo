@@ -25,15 +25,15 @@ const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <RecruitmentBrief title={""} cooperation={""} neighbourhood={""} province={""} time={0} url={""} />
+                <RecruitmentBrief title={jobDetails.title} cooperation={jobDetails.cooperation} province={jobDetails.province} time={jobDetails.time} url={jobDetails.url} />
             </Grid>
-            {/* <Grid item xs={7}>
+            <Grid item xs={7}>
                 <Stack>
-                    <RecruitmentSpecification />
+                    <RecruitmentSpecification jobDetails={jobDetails} />
                     <Typography sx={titleStyle}>آگهی‌های مشابه</Typography>
-                    <SimilarRecruitment />
+                    {/* <SimilarRecruitment /> */}
                 </Stack>
-            </Grid> */}
+            </Grid>
         </Grid>
     )
 }

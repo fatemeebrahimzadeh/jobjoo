@@ -56,7 +56,7 @@ const SimilarRecruitment = () =>{
             logoSrc : corporationLogo
         },
     ];
-    return recruitmentList.map((recruitment,i) => <Card key={i} sx={cardStyle}><JobCard jobDetails={recruitment}/></Card>
-    )
+    // return recruitmentList.map((recruitment,i) => <Card key={i} sx={cardStyle}><JobCard jobDetails={recruitment}/></Card>)
+    return <></>
 }
 export default SimilarRecruitment
