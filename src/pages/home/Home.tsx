@@ -281,7 +281,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                                     searchOnClickHandler={this.searchOnClickHandler} />
                             </Card>
                             {this.jobsList.map((job, i) =>
-                                <Link key={i} to="/recruitment" onClick={() => { }} >
+                                <Link key={i} to="/recruitment" state={job} >
                                     <Card key={i} sx={{
                                         width: '100%',
                                         height: '180px',

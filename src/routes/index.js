@@ -11,6 +11,9 @@ const Loadable = (Component) => (props) => {
 };
 
 export default function Router() {
+
+    const location = useLocation()
+
     return useRoutes([
         {
             path: 'test',
@@ -18,7 +21,7 @@ export default function Router() {
         },
         {
             path: 'recruitment',
-            element: <RecruitmentPage />
+            element: <RecruitmentPage jobDetails={location.state} />
         },
         {
             path: 'test2',

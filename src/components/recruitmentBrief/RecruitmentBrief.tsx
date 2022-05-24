@@ -1,5 +1,5 @@
-import {Button, Card, Grid, Paper, Typography} from "@mui/material";
-import {useState} from "react";
+import { Button, Card, Grid, Paper, Typography } from "@mui/material";
+import { useState } from "react";
 import nonSaveIc from "../../assets/icons/ic-save.png";
 import saveIc from "../../assets/icons/ic-save-black.png";
 import corporationLogo from "../../assets/img/corporation-logo.jpg";
@@ -70,7 +70,7 @@ const cityStyle = {
 const buttonStyle = {
     width: '261px',
     height: '51px',
-    color:'white',
+    color: 'white',
     margin: '42px 0 0 15px',
     padding: '14px 57px 13px 58px',
     borderRadius: '10px',
@@ -84,23 +84,35 @@ const job = {
     city: 'تهران',
     logoSrc: corporationLogo
 }
-const RecruitmentBrief = () => {
+
+interface IProps {
+    title: string
+    cooperation: string
+    neighbourhood: string
+    province: string
+    time: number
+    url: string
+}
+
+const RecruitmentBrief = (props: IProps) => {
+
     const [saveRecruitment, setSaveRecruitment] = useState(false);
     const saveHandler = () => {
         setSaveRecruitment(!saveRecruitment);
     }
+
     return (
         <Card sx={cardStyle}>
-            {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler}/>}
-            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={saveHandler}/>}
+            {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler} />}
+            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={saveHandler} />}
             <Typography sx={titleStyle}>{job.jobTitle}</Typography>
             <Grid container justifyContent='end'>
                 <Grid item sx={corporationStyle}>{job.faCorporation} | {job.enCorporation}</Grid>
-                <Grid item sx={{marginTop: '15px'}}><img src={corporationIc}/></Grid>
+                <Grid item sx={{ marginTop: '15px' }}><img src={corporationIc} /></Grid>
             </Grid>
             <Grid container justifyContent='end'>
                 <Grid item sx={cityStyle}>{job.city}</Grid>
-                <Grid item sx={{marginTop: '15px'}}><img src={cityIc}/></Grid>
+                <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
             </Grid>
             <Typography sx={requestDateStyle}>{job.requestDate}</Typography>
             <Button sx={buttonStyle}>مشاهده آگهی در جابینجا</Button>

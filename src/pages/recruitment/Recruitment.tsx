@@ -2,7 +2,7 @@ import { Card, Grid, Stack, Typography } from "@mui/material";
 import RecruitmentSpecification from "../../components/recruitmentSpecification/RecruitmentSpecification";
 import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
 import RecruitmentBrief from "../../components/recruitmentBrief/RecruitmentBrief";
-import { connect } from "react-redux";
+import { IRecruiment } from "../../@types/entities/recruiment";
 
 const titleStyle = {
     marginBottom: '15px',
@@ -17,28 +17,25 @@ const titleStyle = {
     textAlign: 'right',
     color: '#4166b7',
 }
-const Recruitment = (props) => {
 
-    console.log(props.selectedRecruiment)
+const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
+
+    console.log("jobDetails", jobDetails)
 
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <RecruitmentBrief />
+                <RecruitmentBrief title={""} cooperation={""} neighbourhood={""} province={""} time={0} url={""} />
             </Grid>
-            <Grid item xs={7}>
+            {/* <Grid item xs={7}>
                 <Stack>
                     <RecruitmentSpecification />
                     <Typography sx={titleStyle}>آگهی‌های مشابه</Typography>
                     <SimilarRecruitment />
                 </Stack>
-            </Grid>
+            </Grid> */}
         </Grid>
     )
 }
 
-function mapStateToProps(state) {
-    return { selectedRecruiment: state.selectedRecruiment }
-}
-
-export default connect(mapStateToProps)(Recruitment);
+export default Recruitment;
