@@ -32,7 +32,7 @@ const RecruitmentSpecification = ({ jobDetails }: { jobDetails: IRecruiment }) =
             <Typography sx={{ ...textStyle, fontSize: '21px', color: '#33334c' }}>شرح موقعیت شغلی</Typography>
             <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}>{jobDetails.description}</Typography>
             <Typography sx={{ ...textStyle, fontSize: '21px', color: '#33334c' }}>جزئیات</Typography>
-            {jobDetails.city ? <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}>شهر: {jobDetails.city}</Typography> : <></>}
+            {jobDetails.city ? <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}>استان: {jobDetails.city}</Typography> : <></>}
             {jobDetails.cooperation ? <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}>نوع همکاری: {jobDetails.cooperation}</Typography> : <></>}
             {jobDetails.education ? <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}>میزان تحصیلات: {jobDetails.education}</Typography> : <></>}
             {jobDetails.experience ? <Typography sx={{ ...textStyle, fontSize: '18px', color: '#33334c', marginBottom: '40px' }}> تجربه کاری: {jobDetails.experience.toString()} سال</Typography> : <></>}
