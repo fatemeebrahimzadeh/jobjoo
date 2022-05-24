@@ -2,21 +2,26 @@ import React, { Component } from "react";
 import "./Box.scss"
 import { Autocomplete, Button, ButtonGroup, IconButton, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import { IHomeDate } from "../../pages/home/Home";
 import { Link } from "react-router-dom";
 
-export interface IBoxOption {
+export interface IData {
+    provinces?: { name: string, id: number }
+    jobTitle?: string
+    categories?: { name: string, id: number }
+}
+
+export interface IOption {
     type: "Select" | "TextField"
     label: string
-    fieldName: keyof IHomeDate
+    fieldName: keyof IData
     width?: string
-    options?: { name: string, id: number }[]
+    options?: { name: string, id: number }[] | []
 }
 
 interface IProps {
-    boxElements: IBoxOption[]
+    boxElements: IOption[]
     searchOnClickHandler(): void
-    onChangeHandler(value: { name: string, id: number } | null | string, fieldName: keyof IHomeDate, event?: React.SyntheticEvent<Element, Event>): void
+    onChangeHandler(value: { name: string, id: number } | null | string, fieldName: keyof IData, event?: React.SyntheticEvent<Element, Event>): void
 }
 
 export default class Box extends Component<IProps> {
