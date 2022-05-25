@@ -5,6 +5,7 @@ import saveIc from "../../assets/icons/ic-save-black.png";
 import corporationLogo from "../../assets/img/corporation-logo.jpg";
 import corporationIc from "../../assets/icons/ic-corpo.png";
 import cityIc from "../../assets/icons/ic-pin.png";
+import Time from "../UI/Time/Time";
 
 const cardStyle = {
     width: '100%',
@@ -105,7 +106,7 @@ const RecruitmentBrief = (props: IProps) => {
                 <Grid item sx={cityStyle}>{props.province}</Grid>
                 <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
             </Grid>
-            {/* <Typography sx={requestDateStyle}>{props.ti}</Typography> */}
+            <Typography sx={requestDateStyle}><Time time={props.time} /></Typography>
             <Button sx={buttonStyle}><a href={props.url} target="_blank" > مشاهده آگهی در جابینجا </a> </Button>
         </Card>
     )

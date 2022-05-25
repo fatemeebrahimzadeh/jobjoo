@@ -5,8 +5,8 @@ import corporationIc from '../../assets/icons/ic-corpo.png'
 import cityIc from '../../assets/icons/ic-pin.png'
 import { useState } from "react";
 import './jobCard.scss'
-import moment from "moment";
 import { IRecruiment } from "../../@types/entities/recruiment";
+import Time from "../UI/Time/Time";
 
 const requestDateStyle = {
     marginTop: '3px',
@@ -77,7 +77,7 @@ const JobCard = (props: IProps) => {
 
     const jobDetail = {
         jobTitle: props.jobDetails.title,
-        requestDate: moment(props.jobDetails.time).startOf('hour').fromNow(),
+        date: <Time time={props.jobDetails.time} />,
         city: props.jobDetails.city,
         logoSrc: props.jobDetails.source?.logo
     }
@@ -89,7 +89,7 @@ const JobCard = (props: IProps) => {
         </Grid>
         <Grid item xs={8}>
             <Grid container justifyContent='end'>
-                <Grid item sx={requestDateStyle}>{jobDetail.requestDate}</Grid>
+                <Grid item sx={requestDateStyle}>{jobDetail.date}</Grid>
                 <Grid item sx={titleStyle}>{jobDetail.jobTitle}</Grid>
             </Grid>
             <Grid container justifyContent='end'>
