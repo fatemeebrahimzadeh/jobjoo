@@ -58,11 +58,12 @@ interface IPageData {
 interface IState {
     ranges: IRanges
     boxData: IBoxData
-    mode: "Home" | "recruiments",
-    collapsejobCategory: boolean,
-    collapsecooperationType: boolean,
-    collapseeducation: boolean,
-    collapsegender: boolean,
+    navbarVertical: IVerticalNavbarData
+    mode: "Home" | "recruiments"
+    collapsejobCategory: boolean
+    collapsecooperationType: boolean
+    collapseeducation: boolean
+    collapsegender: boolean
     collapseinsurnace: boolean
 }
 
@@ -85,6 +86,13 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         jobTitle: "",
         categories: undefined
     }
+    defaultnavbarVerticala: IVerticalNavbarData = {
+        navbarVerticalCategories: undefined,
+        navbarVerticalCooperation: undefined,
+        navbarVerticalEducation: undefined,
+        navbarVerticalGender: undefined,
+        navbarVerticalInsurnace: undefined
+    }
 
     state: IState = {
         ranges: {
@@ -103,6 +111,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
             provinces: []
         },
         boxData: this.defaultBoxData,
+        navbarVertical: this.defaultnavbarVerticala,
         mode: "Home",
         collapsejobCategory: false,
         collapsecooperationType: false,
@@ -134,11 +143,11 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
             category: this.state.boxData.categories?.name
         })
 
-        console.log("response", response, "pageId", pageId)
+        console.log("searchOnClickHandler response", response, "pageId", pageId)
         // this.props.SET_RECRUIMENTS(response.boxData.result)
         this.pageData = { counts: response.data.counts, current_page: response.data.current_page, page_counts: response.data.page_counts }
         this.jobsList = response.data.result
-        this.setState({ mode: "recruiments" })
+        this.setState({ mode: "recruiments", navbarVertical: this.defaultnavbarVerticala })
     }
 
     boxOnChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IBoxData, event?: React.SyntheticEvent<Element, Event>) => {
@@ -170,14 +179,36 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         this.setState({ collapseinsurnace: !this.state.collapseinsurnace })
     };
 
-    verticalNavbarOnChangeHandler = (value: { name: string, id: number } | null, fieldName: keyof IVerticalNavbarData, event?: React.SyntheticEvent<Element, Event>) => {
+    verticalNavbarOnChangeHandler = (value: string[], fieldName: keyof IVerticalNavbarData, pageId: number, event?: React.SyntheticEvent<Element, Event>) => {
         this.setState((prevState: IState) => ({
             ...prevState,
-            boxData: {
-                ...prevState.boxData,
+            navbarVertical: {
+                ...prevState.navbarVertical,
                 [fieldName]: value
             }
-        }))
+        }), async () => {
+            let response = this.state.boxData.jobTitle ? await Axios.post<any, AxiosResponse<{ counts: number, current_page: number, page_counts: number, result: IRecruiment[] }>>(`/api/search/recruiment/${pageId}/`, {
+                search: this.state.boxData.jobTitle,
+                province: this.state.boxData.provinces?.name,
+                category: this.state.boxData.categories?.name,
+                cooperation: this.state.navbarVertical.navbarVerticalCooperation,
+                education: this.state.navbarVertical.navbarVerticalEducation,
+                gender: this.state.navbarVertical.navbarVerticalGender,
+                insurnace: this.state.navbarVertical.navbarVerticalInsurnace
+            }) : await Axios.post<any, AxiosResponse<{ counts: number, current_page: number, page_counts: number, result: IRecruiment[] }>>(`/api/search/recruiment/${pageId}/`, {
+                province: this.state.boxData.provinces?.name,
+                category: this.state.boxData.categories?.name,
+                cooperation: this.state.navbarVertical.navbarVerticalCooperation,
+                education: this.state.navbarVertical.navbarVerticalEducation,
+                gender: this.state.navbarVertical.navbarVerticalGender,
+                insurnace: this.state.navbarVertical.navbarVerticalInsurnace
+            })
+
+            console.log("verticalNavbarOnChangeHandler response", response, "pageId", pageId)
+            // this.props.SET_RECRUIMENTS(response.boxData.result)
+            this.pageData = { counts: response.data.counts, current_page: response.data.current_page, page_counts: response.data.page_counts }
+            this.jobsList = response.data.result
+        })
     }
     //#endregion
 
@@ -214,13 +245,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
         ]
 
         this.navbarVerticalElements = [
-            {
-                label: "دسته بندی شغلی",
-                options: this.categoriesSelectOptopns,
-                fieldName: "navbarVerticalCategories",
-                collapseHandler: this.jobCategoryHandleClick,
-                collapse: this.state.collapsejobCategory
-            },
             {
                 label: "نوع همکاری",
                 options: this.CooperationSelectOptopns,
@@ -316,7 +340,8 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                             }}>
                                 <NavbarVertical
                                     navbarVerticalElements={this.navbarVerticalElements}
-                                    onChangeHandler={this.verticalNavbarOnChangeHandler} />
+                                    onChangeHandler={this.verticalNavbarOnChangeHandler}
+                                    data={this.state.navbarVertical} />
                             </Card>
                         </Grid>
                     </Grid>

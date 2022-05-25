@@ -10,11 +10,11 @@ import StepConnector from '@mui/material/StepConnector';
 import { Stack } from "@mui/material";
 
 export interface IData {
-    navbarVerticalCategories?: { name: string, id: number }
-    navbarVerticalCooperation?: { name: string, id: number }
-    navbarVerticalEducation?: { name: string, id: number }
-    navbarVerticalGender?: { name: string, id: number }
-    navbarVerticalInsurnace?: { name: string, id: number }
+    navbarVerticalCategories?: string[]
+    navbarVerticalCooperation?: string[]
+    navbarVerticalEducation?: string[]
+    navbarVerticalGender?: string[]
+    navbarVerticalInsurnace?: string[]
 }
 
 export interface IOption {
@@ -27,7 +27,8 @@ export interface IOption {
 
 interface IProps {
     navbarVerticalElements: IOption[]
-    onChangeHandler(value: { name: string, id: number } | null | string, fieldName: keyof IData, event?: React.SyntheticEvent<Element, Event>): void
+    onChangeHandler(value: string[], fieldName: keyof IData, pageId: number, event?: React.SyntheticEvent<Element, Event>): void
+    data: IData
 }
 
 const navbarTitleStyle = {
@@ -59,7 +60,12 @@ export default function NavbarVertical(props: IProps) {
 
     let navbarVerticalElements = props.navbarVerticalElements.map((navbarVerticalElement, index) => {
         let ListItem = navbarVerticalElement.options.map((option, index) => {
-            return <ListItemButton key={index} sx={{ pl: 4 }}>
+            return <ListItemButton key={index} sx={{ pl: 4 }} onClick={() => {
+                let arr = []
+                arr.push(option.name)
+                props.onChangeHandler(arr, navbarVerticalElement.fieldName, 1)
+            }
+            }>
                 <>{option.name}</>
             </ListItemButton>
         })
@@ -70,7 +76,7 @@ export default function NavbarVertical(props: IProps) {
                     {navbarVerticalElement.collapse ? <ExpandLess sx={{ color: '#4166b7', marginTop: '-20px' }} /> : <ExpandMore sx={{ color: '#4166b7', marginTop: '-20px' }} />}
                     <Stack sx={{ width: '100%' }}>
                         <ListItemText sx={navbarTitleStyle}>{navbarVerticalElement.label}</ListItemText>
-                        <ListItemText sx={navbarContentStyle}>همه موارد</ListItemText>
+                        <ListItemText sx={navbarContentStyle}>{props.data[navbarVerticalElement.fieldName] ? props.data[navbarVerticalElement.fieldName] : "همه موارد"}</ListItemText>
                     </Stack>
                 </ListItemButton>
                 <StepConnector sx={{ width: '90%', margin: '10px auto 10px auto' }} />
