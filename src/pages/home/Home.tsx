@@ -49,6 +49,12 @@ let companyLogos: {
         }
     ]
 
+interface IPageData {
+    counts: number
+    current_page: number
+    page_counts: number
+}
+
 interface IState {
     ranges: IRanges
     boxData: IBoxData
@@ -67,6 +73,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     boxElements: IBoxOption[] = []
     jobsList: IRecruiment[] = []
+    pageData: IPageData = { counts: 0, current_page: 0, page_counts: 0 }
     navbarVerticalElements: IVerticalNavbarOption[] = []
     categoriesSelectOptopns: { name: string, id: number }[] = []
     CooperationSelectOptopns: { name: string, id: number }[] = []
@@ -117,18 +124,19 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
 
     //#region Box
 
-    searchOnClickHandler = async () => {
-        let response = this.state.boxData.jobTitle ? await Axios.post<any, AxiosResponse<{ result: IRecruiment[] }>>('/api/search/recruiment/1/', {
+    searchOnClickHandler = async (pageId: number) => {
+        let response = this.state.boxData.jobTitle ? await Axios.post<any, AxiosResponse<{ counts: number, current_page: number, page_counts: number, result: IRecruiment[] }>>(`/api/search/recruiment/${pageId}/`, {
             search: this.state.boxData.jobTitle,
             province: this.state.boxData.provinces?.name,
             category: this.state.boxData.categories?.name
-        }) : await Axios.post<any, AxiosResponse<{ result: IRecruiment[] }>>('/api/search/recruiment/1/', {
+        }) : await Axios.post<any, AxiosResponse<{ counts: number, current_page: number, page_counts: number, result: IRecruiment[] }>>(`/api/search/recruiment/${pageId}/`, {
             province: this.state.boxData.provinces?.name,
             category: this.state.boxData.categories?.name
         })
 
-        console.log("response", response)
+        console.log("response", response, "pageId", pageId)
         // this.props.SET_RECRUIMENTS(response.boxData.result)
+        this.pageData = { counts: response.data.counts, current_page: response.data.current_page, page_counts: response.data.page_counts }
         this.jobsList = response.data.result
         this.setState({ mode: "recruiments" })
     }
@@ -255,7 +263,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                             <h3>با بیش از 1000 آگهی بروز از سایت‌های معتبر کاریابی</h3>
                             <CustomBox
                                 boxElements={this.boxElements}
-                                searchOnClickHandler={this.searchOnClickHandler}
+                                searchOnClickHandler={() => { this.searchOnClickHandler(1) }}
                                 onChangeHandler={this.boxOnChangeHandler} />
                             <div className="companyLogos">
                                 {companyLogosImage}
@@ -278,7 +286,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                                 <CustomBox
                                     boxElements={this.boxElements}
                                     onChangeHandler={this.boxOnChangeHandler}
-                                    searchOnClickHandler={this.searchOnClickHandler} />
+                                    searchOnClickHandler={() => { this.searchOnClickHandler(1) }} />
                             </Card>
                             {this.jobsList.map((job, i) =>
                                 <Link key={i} to="/recruitment" state={job} >
@@ -294,7 +302,9 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                                         <JobCard jobDetails={job} />
                                     </Card>
                                 </Link>)}
-                            <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }} count={10} />
+                            <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }}
+                                onChange={(event, page) => { this.searchOnClickHandler(page) }}
+                                count={this.pageData.counts} />
                         </Grid>
                         <Grid item xs={3}>
                             <Card sx={{
