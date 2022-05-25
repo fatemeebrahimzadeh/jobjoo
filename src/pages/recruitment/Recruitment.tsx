@@ -3,7 +3,7 @@ import RecruitmentSpecification from "../../components/recruitmentSpecification/
 import SimilarRecruitment from "../../components/similarRecruitment/SimilarRecruitment";
 import RecruitmentBrief from "../../components/recruitmentBrief/RecruitmentBrief";
 import { IRecruiment } from "../../@types/entities/recruiment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Axios } from "../../utils/axios";
 import { AxiosResponse } from "axios";
 
@@ -23,9 +23,12 @@ const titleStyle = {
 
 const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
 
+    const [similarRecruitment, setSimilarRecruitment] = useState<IRecruiment[]>([])
+
     const getData = async () => {
-        const response = await Axios.get(`/similar/ads/recruiment/${jobDetails.source.id}/`);
-        console.log(response)
+        const response = await Axios.get<any, AxiosResponse<{ similar: IRecruiment[] }>>(`api/similar/ads/recruiment/${jobDetails.token}/`);
+        console.log(response.data.similar)
+        setSimilarRecruitment(response.data.similar)
     };
 
     useEffect(() => {
@@ -41,7 +44,7 @@ const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
                 <Stack>
                     <RecruitmentSpecification jobDetails={jobDetails} />
                     <Typography sx={titleStyle}>آگهی‌های مشابه</Typography>
-                    <SimilarRecruitment recruitments={[]} />
+                    <SimilarRecruitment recruitments={similarRecruitment} />
                 </Stack>
             </Grid>
         </Grid>
