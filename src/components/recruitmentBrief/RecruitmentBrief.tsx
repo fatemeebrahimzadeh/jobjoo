@@ -107,7 +107,14 @@ const RecruitmentBrief = (props: IProps) => {
                 <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
             </Grid>
             <Typography sx={requestDateStyle}><Time time={props.time} /></Typography>
-            <Button sx={buttonStyle}><a href={props.url} target="_blank" > مشاهده آگهی در جابینجا </a> </Button>
+            <Button sx={buttonStyle}><a href={props.url} target="_blank" style={{textDecoration:'none',
+                fontSize: '18px',
+                fontWeight: 'normal',
+                fontStretch: 'normal',
+                fontStyle: 'normal',
+                lineHeight: 1.67,
+                letterSpacing: 'normal',
+                color: 'black'}}> مشاهده آگهی در جابینجا </a> </Button>
         </Card>
     )
 }

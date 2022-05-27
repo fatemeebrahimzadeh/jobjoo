@@ -39,7 +39,7 @@ export default class Box extends Component<IProps> {
                         // id="combo-box-demo"
                         options={boxElement.options!}
                         getOptionLabel={(option) => option.name}
-                        renderInput={(params) => <TextField variant="standard" {...params} label={boxElement.label} sx={{paddingBottom:2}} />}
+                        renderInput={(params) => <TextField variant="standard" {...params} label={boxElement.label}  />}
                     />
                 case "TextField":
                     return <TextField onChange={(event) => this.props.onChangeHandler(event.target.value, boxElement.fieldName, event)} key={index} id="outlined-basic" label={boxElement.label} variant="standard" />
