@@ -32,45 +32,32 @@ import LoginModal from "../loginModal/LoginModal";
 //     }
 // }
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#fff",
-        }
-    },
-});
 
 const Navbar = () => {
-    const [openModal,setOpenModal]=useState(false)
+    const [openModal, setOpenModal] = useState(false)
     const openLoginModalHandler = () => {
         console.log('open')
         setOpenModal(true)
     }
     return (
         <nav className="Navbar">
-            <ButtonGroup className="loginBtn">
-                <ThemeProvider theme={theme}>
-                    <Button
-                        size="medium"
-                        color="primary"
-                        disabled
-                        onClick={() => {
-                        }}
-                        variant="text">ثبت نام</Button>
-                    <Button
-                        className="Button--left-H-line"
-                        size="medium"
-                        color="primary"
-                        disabled
-                        onClick={()=> console.log('open')}
-                        variant="text">ورود</Button>
-                </ThemeProvider>
+            <ButtonGroup className="loginBtn" variant="text" aria-label="text button group">
+                <Button
+                    size="medium"
+                    color="primary"
+                    disabled
+                    onClick={() => {
+                    }}>ثبت نام</Button>
+                <Button
+                    className="Button--left-H-line"
+                    size="medium"
+                    color="primary"
+                    onClick={openLoginModalHandler}>ورود</Button>
             </ButtonGroup>
             <div className="Navbar__logo">
                 <img src={logo} alt=""/>
             </div>
-            <button onClick={openLoginModalHandler}>test</button>
-            <LoginModal open={openModal} setOpen={setOpenModal} bodyContent='body' hideClose={true}/>
+            <LoginModal open={openModal} setOpen={setOpenModal} hideClose={true}/>
         </nav>
     )
 }
