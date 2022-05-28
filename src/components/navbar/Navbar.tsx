@@ -40,25 +40,27 @@ const Navbar = () => {
         setOpenModal(true)
     }
     return (
-        <nav className="Navbar">
-            <ButtonGroup className="loginBtn" variant="text" aria-label="text button group">
-                <Button
-                    size="medium"
-                    color="primary"
-                    disabled
-                    onClick={() => {
-                    }}>ثبت نام</Button>
-                <Button
-                    className="Button--left-H-line"
-                    size="medium"
-                    color="primary"
-                    onClick={openLoginModalHandler}>ورود</Button>
-            </ButtonGroup>
-            <div className="Navbar__logo">
-                <img src={logo} alt=""/>
-            </div>
+        <>
+            <nav className="Navbar">
+                <ButtonGroup className="loginBtn" variant="text" aria-label="text button group">
+                    <Button
+                        size="medium"
+                        color="primary"
+                        disabled
+                        onClick={() => {
+                        }}>ثبت نام</Button>
+                    <Button
+                        className="Button--left-H-line"
+                        size="medium"
+                        color="primary"
+                        onClick={openLoginModalHandler}>ورود</Button>
+                </ButtonGroup>
+                <div className="Navbar__logo">
+                    <img src={logo} alt=""/>
+                </div>
+            </nav>
             <LoginModal open={openModal} setOpen={setOpenModal} hideClose={true}/>
-        </nav>
+        </>
     )
 }
 export default Navbar
