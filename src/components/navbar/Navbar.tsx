@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import "./Navbar.scss"
 import logo from "../../assets/img/logo.png"
-import { Button, ButtonGroup, ThemeProvider } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
+import {Button, ButtonGroup, ThemeProvider} from "@mui/material";
+import {createTheme} from '@mui/material/styles';
+import LoginModal from "../loginModal/LoginModal";
 // typescript
 // declare module '@mui/material/styles' {
 //     interface Theme {
@@ -31,39 +32,35 @@ import { createTheme } from '@mui/material/styles';
 //     }
 // }
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#fff",
-        }
-    },
-});
 
-export default class Navbar extends Component {
-    render() {
-        return (
+const Navbar = () => {
+    const [openModal, setOpenModal] = useState(false)
+    const openLoginModalHandler = () => {
+        console.log('open')
+        setOpenModal(true)
+    }
+    return (
+        <>
             <nav className="Navbar">
-                <ButtonGroup className="loginBtn">
-                    <ThemeProvider theme={theme}>
-                        <Button
-                            size="medium"
-                            color="primary"
-                            disabled
-                            onClick={() => { }}
-                            variant="text">ثبت نام</Button>
-                        <Button
-                            className="Button--left-H-line"
-                            size="medium"
-                            color="primary"
-                            disabled
-                            onClick={() => { }}
-                            variant="text">ورود</Button>
-                    </ThemeProvider>
+                <ButtonGroup className="loginBtn" variant="text" aria-label="text button group">
+                    <Button
+                        size="medium"
+                        color="primary"
+                        disabled
+                        onClick={() => {
+                        }}>ثبت نام</Button>
+                    <Button
+                        className="Button--left-H-line"
+                        size="medium"
+                        color="primary"
+                        onClick={openLoginModalHandler}>ورود</Button>
                 </ButtonGroup>
                 <div className="Navbar__logo">
-                    <img src={logo} alt="" />
+                    <img src={logo} alt=""/>
                 </div>
             </nav>
-        )
-    }
+            <LoginModal open={openModal} setOpen={setOpenModal} hideClose={true}/>
+        </>
+    )
 }
+export default Navbar
