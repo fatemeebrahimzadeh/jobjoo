@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 import Spinner from '../components/UI/spinner/Spinner';
+import Favorites from "../pages/favorite/Favorites";
 
 const Loadable = (Component) => (props) => {
     return (
@@ -22,6 +23,10 @@ export default function Router() {
         {
             path: 'recruitment',
             element: <RecruitmentPage jobDetails={location.state} />
+        },
+        {
+            path: 'favorite',
+            element: <FavoritePage/>
         },
         {
             path: 'test2',
@@ -77,4 +82,5 @@ const Test = Loadable(lazy(() => import('../components/test/Test')));
 const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 const RecruitmentPage = Loadable(lazy(() => import('../pages/recruitment/Recruitment')));
+const FavoritePage = Loadable(lazy(() => import('../pages/favorite/Favorites')));
 const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
