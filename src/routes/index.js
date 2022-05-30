@@ -50,7 +50,6 @@ export default function Router() {
             children: [
                 { path: '404', element: <p>404</p> },
                 { path: '*', element: <Navigate to="/404" replace /> },
-                { path: 'test', element: <Test /> },
             ],
         },
         {
