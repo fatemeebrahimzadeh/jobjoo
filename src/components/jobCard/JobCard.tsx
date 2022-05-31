@@ -69,12 +69,6 @@ interface IProps {
 
 const JobCard = (props: IProps) => {
 
-    const [saveJob, setSaveJob] = useState(false);
-
-    const saveHandler = () => {
-        setSaveJob(!saveJob);
-    }
-
     const jobDetail = {
         jobTitle: props.jobDetails.title,
         date: <Time time={props.jobDetails.time} />,
@@ -83,10 +77,6 @@ const JobCard = (props: IProps) => {
     }
 
     return (<Grid container>
-        <Grid item xs={2}>
-            {!saveJob && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler} />}
-            {saveJob && <img src={saveIc} alt='save-icon' onClick={saveHandler} />}
-        </Grid>
         <Grid item xs={8}>
             <Grid container justifyContent='end'>
                 <Grid item sx={requestDateStyle}>{jobDetail.date}</Grid>

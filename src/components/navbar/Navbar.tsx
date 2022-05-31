@@ -1,9 +1,11 @@
-import React, {Component, useState} from "react";
+import React, { Component, useState } from "react";
 import "./Navbar.scss"
 import logo from "../../assets/img/logo.png"
-import {Button, ButtonGroup, ThemeProvider} from "@mui/material";
-import {createTheme} from '@mui/material/styles';
+import { Button, ButtonGroup, ThemeProvider } from "@mui/material";
+import { createTheme } from '@mui/material/styles';
 import LoginModal from "../loginModal/LoginModal";
+import { AxiosResponse } from "axios";
+import { Axios } from "../../utils/axios";
 // typescript
 // declare module '@mui/material/styles' {
 //     interface Theme {
@@ -32,13 +34,74 @@ import LoginModal from "../loginModal/LoginModal";
 //     }
 // }
 
+export interface IData {
+    PhoneNumber: string
+    Code: string
+}
+
 
 const Navbar = () => {
     const [openModal, setOpenModal] = useState(false)
+    const [modalInputLabel, setModalInputLabel] = useState("Phone Number")
+    const [PhoneNumber, setPhoneNumber] = useState("")
+    const [Code, setCode] = useState("")
+
     const openLoginModalHandler = () => {
-        console.log('open')
+        setModalInputLabel("Phone Number")
         setOpenModal(true)
     }
+
+    const submitLoginHandler = () => {
+        if (modalInputLabel === "Phone Number") {
+            setModalInputLabel("code")
+            sendUsername()
+        } else {
+            sendCode()
+            setOpenModal(false)
+        }
+    }
+
+    const modalOnChange = (value: string, fieldName: keyof IData) => {
+        switch (fieldName) {
+            case "PhoneNumber":
+                setPhoneNumber(value)
+                break;
+            case "Code":
+                setCode(value)
+                break;
+            default:
+                break;
+        }
+    }
+
+    const sendCode = async () => {
+        try {
+            let { data } = await Axios.post<any, AxiosResponse<{
+                token: string
+            }>>("/auth/login/", {
+                username: PhoneNumber,
+                password: Code
+            })
+            // console.log("data.token", data.token)
+            localStorage.setItem('token', data.token)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const sendUsername = async () => {
+        try {
+            let { data } = await Axios.post("/auth/login-request/", {
+                username: PhoneNumber,
+            })
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // console.log(localStorage.getItem("token"))
+
     return (
         <>
             <nav className="Navbar">
@@ -56,10 +119,15 @@ const Navbar = () => {
                         onClick={openLoginModalHandler}>ورود</Button>
                 </ButtonGroup>
                 <div className="Navbar__logo">
-                    <img src={logo} alt=""/>
+                    <img src={logo} alt="" />
                 </div>
             </nav>
-            <LoginModal open={openModal} setOpen={setOpenModal} hideClose={true}/>
+            <LoginModal
+                open={openModal}
+                setOpen={setOpenModal}
+                submitLoginHandler={submitLoginHandler}
+                inputLabel={modalInputLabel}
+                onChange={modalOnChange} />
         </>
     )
 }

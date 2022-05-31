@@ -6,6 +6,7 @@ import corporationLogo from "../../assets/img/corporation-logo.jpg";
 import corporationIc from "../../assets/icons/ic-corpo.png";
 import cityIc from "../../assets/icons/ic-pin.png";
 import Time from "../UI/Time/Time";
+import { Axios } from "../../utils/axios";
 
 const cardStyle = {
     width: '100%',
@@ -84,19 +85,64 @@ interface IProps {
     province: string
     time: Date
     url: string
+    token: number
 }
 
 const RecruitmentBrief = (props: IProps) => {
 
     const [saveRecruitment, setSaveRecruitment] = useState(false);
-    const saveHandler = () => {
+
+    const toggleSaveHandler = () => {
         setSaveRecruitment(!saveRecruitment);
+    }
+
+    const saveHandler = async () => {
+        toggleSaveHandler()
+        try {
+            const token = localStorage.getItem('token')
+
+            const { data } = await Axios.post('/api/favourite/',
+                {
+                    type: "recruiment",
+                    token: props.token
+                },
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                })
+
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const unSaveHandler = async () => {
+        toggleSaveHandler()
+        try {
+            const token = localStorage.getItem('token')
+
+            const { data } = await Axios.delete('/api/favourite/',
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    },
+                    data: {
+                        type: "recruiment",
+                        token: props.token
+                    }
+                })
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
         <Card sx={cardStyle}>
             {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler} />}
-            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={saveHandler} />}
+            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={unSaveHandler} />}
             <Typography sx={titleStyle}>{props.title}</Typography>
             <Grid container justifyContent='end'>
                 <Grid item sx={corporationStyle}>{props.cooperation}</Grid>
@@ -107,14 +153,16 @@ const RecruitmentBrief = (props: IProps) => {
                 <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
             </Grid>
             <Typography sx={requestDateStyle}><Time time={props.time} /></Typography>
-            <Button sx={buttonStyle}><a href={props.url} target="_blank" style={{textDecoration:'none',
+            <Button sx={buttonStyle}><a href={props.url} target="_blank" style={{
+                textDecoration: 'none',
                 fontSize: '18px',
                 fontWeight: 'normal',
                 fontStretch: 'normal',
                 fontStyle: 'normal',
                 lineHeight: 1.67,
                 letterSpacing: 'normal',
-                color: 'black'}}> مشاهده آگهی در جابینجا </a> </Button>
+                color: 'black'
+            }}> مشاهده آگهی در جابینجا </a> </Button>
         </Card>
     )
 }

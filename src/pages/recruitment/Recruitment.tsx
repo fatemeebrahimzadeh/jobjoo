@@ -38,7 +38,7 @@ const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <RecruitmentBrief title={jobDetails.title} cooperation={jobDetails.cooperation} province={jobDetails.province} time={jobDetails.time} url={jobDetails.url} />
+                <RecruitmentBrief {...jobDetails} />
             </Grid>
             <Grid item xs={7}>
                 <Stack>

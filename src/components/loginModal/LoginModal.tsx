@@ -1,16 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import {Card, Tooltip} from '@mui/material';
+import { Card, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FormControlUnstyled, {
     useFormControlUnstyledContext,
 } from '@mui/base/FormControlUnstyled';
-import InputUnstyled, {inputUnstyledClasses} from '@mui/base/InputUnstyled';
-import {styled} from '@mui/system';
+import InputUnstyled, { inputUnstyledClasses } from '@mui/base/InputUnstyled';
+import { styled } from '@mui/system';
 import clsx from 'clsx';
-import {Icon} from "@iconify/react";
-import ButtonUnstyled, {buttonUnstyledClasses} from "@mui/base/ButtonUnstyled";
+import { Icon } from "@iconify/react";
+import ButtonUnstyled, { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
+import { IData as ILoginData } from "../navbar/Navbar"
 
 const modalStyle = {
     bgcColor: 'red',
@@ -42,7 +43,7 @@ const grey = {
     900: '#1A2027',
 };
 const Label = styled(
-    ({children, className}: { children?: React.ReactNode; className?: string }) => {
+    ({ children, className }: { children?: React.ReactNode; className?: string }) => {
         const formControlContext = useFormControlUnstyledContext();
         const [dirty, setDirty] = React.useState(false);
 
@@ -56,7 +57,7 @@ const Label = styled(
             return <p>{children}</p>;
         }
 
-        const {error, required, filled} = formControlContext;
+        const { error, required, filled } = formControlContext;
         const showRequiredError = dirty && required && !filled;
 
         return (
@@ -77,7 +78,7 @@ const Label = styled(
 `;
 
 const Input = styled(InputUnstyled)(
-    ({theme}) => `
+    ({ theme }) => `
   
   .${inputUnstyledClasses.input} {
     width: 320px;
@@ -116,7 +117,7 @@ const HelperText = styled((props: {}) => {
         return null;
     }
 
-    const {required, filled} = formControlContext;
+    const { required, filled } = formControlContext;
     const showRequiredError = dirty && required && !filled;
 
     return showRequiredError ? <p {...props}>This field is required.</p> : null;
@@ -156,30 +157,36 @@ const CustomButton = styled(ButtonUnstyled)`
     cursor: not-allowed;
   }
 `;
-const LoginModal: React.FC<{ open: boolean, setOpen: any, hideClose: any }> = ({open, setOpen, hideClose}) => {
-    const handleClose = () => setOpen(false);
 
-    const submitLoginHandler = () => {
-        setOpen(false);
-    }
+interface IProps {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    open: boolean
+    inputLabel: string
+    submitLoginHandler(): void
+    onChange: (value: string, fieldName: keyof ILoginData) => void
+}
+
+const LoginModal: React.FC<IProps> = (props) => {
+    const handleClose = () => props.setOpen(false);
 
     return (
         <div>
             <Modal
-                open={open}
+                open={props.open}
                 onClose={handleClose}
             >
-                <Card sx={{...modalStyle, maxWidth: '25%'}}>
+                <Card sx={{ ...modalStyle, maxWidth: '25%' }}>
                     <Tooltip title='close'>
-                        <IconButton aria-label="delete" size="small" sx={{marginTop:-2,float:'right'}} onClick={handleClose}>
-                            <Box component={Icon} icon={"eva:close-outline"} sx={{width: '15', height: '15'}}/>
+                        <IconButton aria-label="delete" size="small" sx={{ marginTop: -2, float: 'right' }} onClick={handleClose}>
+                            <Box component={Icon} icon={"eva:close-outline"} sx={{ width: '15', height: '15' }} />
                         </IconButton>
                     </Tooltip>
                     <FormControlUnstyled defaultValue="" required>
-                        <Label>Name</Label>
-                        <Input/>
-                        <HelperText/>
-                        <CustomButton onClick={submitLoginHandler}>submit</CustomButton>
+                        <Label>{props.inputLabel}</Label>
+                        <Input
+                            onChange={(event) => props.onChange(event.target.value, props.inputLabel === "Phone Number" ? "PhoneNumber" : "Code")} />
+                        <HelperText />
+                        <CustomButton onClick={props.submitLoginHandler}>submit</CustomButton>
                     </FormControlUnstyled>
                 </Card>
             </Modal>
