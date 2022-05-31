@@ -4,7 +4,7 @@ import Tabs from "./Tabs";
 const Profile = () => {
     return (
         <>
-            <Avatar/>
+            {/* <Avatar/> */}
             <Tabs/>
         </>
     )

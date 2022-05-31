@@ -56,7 +56,7 @@ const Tabs :React.FC = () =>{
                         <AntTab label="اطلاعات من" value="2" disable={true}/>
                     </TabList>
                 </Box >
-                <TabPanel value="1" dir='rtl'>
+                <TabPanel value="1">
                     <Favorites/>
                 </TabPanel>
                 <TabPanel value="2" dir='rtl' >اطلاعات من</TabPanel>
