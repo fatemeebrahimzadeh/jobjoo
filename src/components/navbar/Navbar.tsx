@@ -53,7 +53,7 @@ const Navbar = () => {
 
     const submitLoginHandler = () => {
         if (modalInputLabel === "Phone Number") {
-            setModalInputLabel("code")
+            setModalInputLabel("Code")
             sendUsername()
         } else {
             sendCode()
@@ -75,6 +75,7 @@ const Navbar = () => {
     }
 
     const sendCode = async () => {
+        console.log(typeof PhoneNumber, PhoneNumber, typeof Code, Code)
         try {
             let { data } = await Axios.post<any, AxiosResponse<{
                 token: string
@@ -122,12 +123,18 @@ const Navbar = () => {
                     <img src={logo} alt="" />
                 </div>
             </nav>
-            <LoginModal
+            {modalInputLabel === "Phone Number" && <LoginModal
                 open={openModal}
                 setOpen={setOpenModal}
                 submitLoginHandler={submitLoginHandler}
                 inputLabel={modalInputLabel}
-                onChange={modalOnChange} />
+                onChange={modalOnChange} />}
+            {modalInputLabel === "Code" && <LoginModal
+                open={openModal}
+                setOpen={setOpenModal}
+                submitLoginHandler={submitLoginHandler}
+                inputLabel={modalInputLabel}
+                onChange={modalOnChange} />}
         </>
     )
 }
