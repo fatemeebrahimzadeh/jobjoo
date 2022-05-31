@@ -314,17 +314,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                             </Card>
                             {this.jobsList.map((job, i) =>
                                 <Link key={i} to="/recruitment" state={job} >
-                                    <Card key={i} sx={{
-                                        width: '100%',
-                                        height: '180px',
-                                        padding: '33px 20px 22px 39px',
-                                        marginTop: '15px',
-                                        borderRadius: '15px',
-                                        borderColor: 'rgba(112, 112, 112, 0.25)',
-                                        backgroundColor: '#fff'
-                                    }}>
-                                        <JobCard jobDetails={job} />
-                                    </Card>
+                                        <JobCard key={i} jobDetails={job} />
                                 </Link>)}
                             <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }}
                                 onChange={(event, page) => { this.searchOnClickHandler(page) }}

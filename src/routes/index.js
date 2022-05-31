@@ -16,16 +16,12 @@ export default function Router() {
 
     return useRoutes([
         {
-            path: 'test',
-            element: <Test />
-        },
-        {
             path: 'recruitment',
             element: <RecruitmentPage jobDetails={location.state} />
         },
         {
-            path: 'test2',
-            element: <Test2 />
+            path: 'profile',
+            element: <ProfilePage/>
         },
         {
             path: 'auth',
@@ -54,7 +50,6 @@ export default function Router() {
             children: [
                 { path: '404', element: <p>404</p> },
                 { path: '*', element: <Navigate to="/404" replace /> },
-                { path: 'test', element: <Test /> },
             ],
         },
         {
@@ -67,8 +62,6 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" replace /> },
     ]);
 }
-// test
-const Test = Loadable(lazy(() => import('../components/test/Test')));
 
 // Authentication
 // const Login = Loadable(lazy(() => import('../components/test/Test')));
@@ -77,4 +70,4 @@ const Test = Loadable(lazy(() => import('../components/test/Test')));
 const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 const RecruitmentPage = Loadable(lazy(() => import('../pages/recruitment/Recruitment')));
-const Test2 = Loadable(lazy(() => import('../components/test/Test2')));
+const ProfilePage = Loadable(lazy(() => import('../pages/profile/Profile')));
