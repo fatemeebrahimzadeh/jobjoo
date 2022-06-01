@@ -12,15 +12,15 @@ const Favorites: React.FC = () => {
     const [pageData, setPageData] = useState({ counts: 0, current_page: 0 })
 
     useEffect(() => {
-        getfavaorite(1)
-    });
+        getfavorite(1)
+    },[]);
 
-    const getfavaorite = async (pageId: number) => {
+    const getfavorite = async (pageId: number) => {
+
         try {
             const token = localStorage.getItem('token')
 
-            // const { data } = await Axios.get<any, AxiosResponse<{ page: number, pages: number, data: IRecruiment[] }>>(`/api/favourite/${pageId}`,
-            const { data } = await Axios.get<any, AxiosResponse<{ page: number, pages: number, data: IRecruiment[] }>>('/api/favourite/',
+            const { data } = await Axios.get<any, AxiosResponse<{ page: number, pages: number, data: IRecruiment[] }>>(`/api/favourite/?page=${pageId}`,
                 {
                     headers: {
                         Authorization: `Token ${token}`
@@ -44,7 +44,7 @@ const Favorites: React.FC = () => {
                 </Link>
             )}
             <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }}
-                onChange={(event, page) => { getfavaorite(page) }}
+                onChange={(event, page) => { getfavorite(page) }}
                 count={pageData.counts} />
         </>
     )

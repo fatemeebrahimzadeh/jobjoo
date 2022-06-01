@@ -6,6 +6,7 @@ import { createTheme } from '@mui/material/styles';
 import LoginModal from "../loginModal/LoginModal";
 import { AxiosResponse } from "axios";
 import { Axios } from "../../utils/axios";
+import { Link } from "react-router-dom";
 // typescript
 // declare module '@mui/material/styles' {
 //     interface Theme {
@@ -109,19 +110,20 @@ const Navbar = () => {
                 <ButtonGroup className="loginBtn" variant="text" aria-label="text button group">
                     <Button
                         size="medium"
-                        color="primary"
-                        disabled
-                        onClick={() => {
-                        }}>ثبت نام</Button>
+                        color="primary">
+                        <Link to={`${localStorage.getItem("token") !== null ? "/profile" : "/"}`}>
+                            پروفایل
+                        </Link>
+                    </Button>
                     <Button
                         className="Button--left-H-line"
                         size="medium"
                         color="primary"
                         onClick={openLoginModalHandler}>ورود</Button>
                 </ButtonGroup>
-                <div className="Navbar__logo">
-                    <img src={logo} alt="" />
-                </div>
+                <Link to="/" className="Navbar__logo">
+                    <img src={logo} alt="logo" />
+                </Link>
             </nav>
             {modalInputLabel === "Phone Number" && <LoginModal
                 open={openModal}

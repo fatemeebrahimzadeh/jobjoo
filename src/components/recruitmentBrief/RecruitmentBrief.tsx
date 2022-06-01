@@ -1,5 +1,5 @@
 import { Button, Card, Grid, Paper, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import nonSaveIc from "../../assets/icons/ic-save.png";
 import saveIc from "../../assets/icons/ic-save-black.png";
 import corporationLogo from "../../assets/img/corporation-logo.jpg";
@@ -86,11 +86,17 @@ interface IProps {
     time: Date
     url: string
     token: number
+    favourite: boolean
 }
 
 const RecruitmentBrief = (props: IProps) => {
 
     const [saveRecruitment, setSaveRecruitment] = useState(false);
+
+    useEffect(() => {
+        console.log(props.favourite)
+        props.favourite ? setSaveRecruitment(true) : setSaveRecruitment(false)
+    }, [props.favourite]);
 
     const toggleSaveHandler = () => {
         setSaveRecruitment(!saveRecruitment);
@@ -123,16 +129,13 @@ const RecruitmentBrief = (props: IProps) => {
         try {
             const token = localStorage.getItem('token')
 
-            const { data } = await Axios.delete('/api/favourite/',
+            const { data } = await Axios.delete(`/api/favourite/?type=recruiment&token=${props.token}`,
                 {
                     headers: {
                         Authorization: `Token ${token}`
-                    },
-                    data: {
-                        type: "recruiment",
-                        token: props.token
                     }
                 })
+
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -141,8 +144,8 @@ const RecruitmentBrief = (props: IProps) => {
 
     return (
         <Card sx={cardStyle}>
-            {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={saveHandler} />}
-            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={unSaveHandler} />}
+            {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={() => { localStorage.getItem("token") !== null && saveHandler() }} />}
+            {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={() => { localStorage.getItem("token") !== null && unSaveHandler() }} />}
             <Typography sx={titleStyle}>{props.title}</Typography>
             <Grid container justifyContent='end'>
                 <Grid item sx={corporationStyle}>{props.cooperation}</Grid>

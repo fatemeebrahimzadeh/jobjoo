@@ -24,11 +24,33 @@ const titleStyle = {
 const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
 
     const [similarRecruitment, setSimilarRecruitment] = useState<IRecruiment[]>([])
+    const [isfavorite, setIsfavorite] = useState(false)
 
     const getData = async () => {
-        const response = await Axios.get<any, AxiosResponse<{ similar: IRecruiment[] }>>(`api/similar/ads/recruiment/${jobDetails.token}/`);
-        console.log(response.data.similar)
-        setSimilarRecruitment(response.data.similar)
+        try {
+            const token = localStorage.getItem('token')
+            console.log(token)
+
+            if (token === null) {
+                const { data } = await Axios.get<any, AxiosResponse<{ similar: IRecruiment[] }>>(`api/similar/ads/recruiment/${jobDetails.token}/`)
+                console.log(data)
+                setSimilarRecruitment(data.similar)
+
+            } else {
+                const { data } = await Axios.get<any, AxiosResponse<{ favourite: boolean, similar: IRecruiment[] }>>(`api/similar/ads/recruiment/${jobDetails.token}/`,
+                    {
+                        headers: {
+                            Authorization: `Token ${token}`
+                        }
+                    })
+                console.log(data)
+                setIsfavorite(data.favourite)
+                setSimilarRecruitment(data.similar)
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     useEffect(() => {
@@ -38,7 +60,7 @@ const Recruitment = ({ jobDetails }: { jobDetails: IRecruiment }) => {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={3}>
-                <RecruitmentBrief {...jobDetails} />
+                <RecruitmentBrief {...jobDetails} favourite={isfavorite} />
             </Grid>
             <Grid item xs={7}>
                 <Stack>
