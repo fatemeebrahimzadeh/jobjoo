@@ -20,6 +20,10 @@ export default function Router() {
             element: <RecruitmentPage jobDetails={location.state} />
         },
         {
+            path: 'comments',
+            element: <CommentsPage />
+        },
+        {
             path: 'profile',
             element: <ProfilePage/>
         },
@@ -71,3 +75,4 @@ const HomePage = Loadable(lazy(() => import('../pages/home/Home')));
 // const NotFound = Loadable(lazy(() => import('../components/test/Test')));
 const RecruitmentPage = Loadable(lazy(() => import('../pages/recruitment/Recruitment')));
 const ProfilePage = Loadable(lazy(() => import('../pages/profile/Profile')));
+const CommentsPage = Loadable(lazy(() => import('../pages/comments/Comments')));
