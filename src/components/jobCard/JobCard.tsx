@@ -1,11 +1,12 @@
-import {Card, Grid} from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import nonSaveIc from '../../assets/icons/ic-save.png'
 import saveIc from '../../assets/icons/ic-save-black.png'
 import cityIc from '../../assets/icons/ic-pin.png'
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import './jobCard.scss'
-import {IRecruiment} from "../../@types/entities/recruiment";
+import { IRecruiment } from "../../@types/entities/recruiment";
 import Time from "../UI/Time/Time";
+import { Axios } from "../../utils/axios";
 
 const requestDateStyle = {
     marginTop: '3px',
@@ -61,6 +62,7 @@ const cityStyle = {
     textAlign: 'right',
     color: '#33334c'
 }
+
 const cardStyle = {
     width: '100%',
     height: '180px',
@@ -79,14 +81,70 @@ const JobCard = (props: IProps) => {
 
     const jobDetail = {
         jobTitle: props.jobDetails.title,
-        date: <Time time={props.jobDetails.time}/>,
+        date: <Time time={props.jobDetails.time} />,
         city: props.jobDetails.city,
         logoSrc: props.jobDetails.source?.logo
     }
 
+
+    const [saveRecruitment, setSaveRecruitment] = useState(false);
+
+    useEffect(() => {
+        console.log(props.jobDetails.favourite)
+        props.jobDetails.favourite ? setSaveRecruitment(true) : setSaveRecruitment(false)
+    }, [props.jobDetails.favourite]);
+
+    const toggleSaveHandler = () => {
+        setSaveRecruitment(!saveRecruitment);
+    }
+
+    const saveHandler = async () => {
+        toggleSaveHandler()
+        try {
+            const token = localStorage.getItem('token')
+
+            const { data } = await Axios.post('/api/favourite/',
+                {
+                    type: "recruiment",
+                    token: props.jobDetails.token
+                },
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                })
+
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const unSaveHandler = async () => {
+        toggleSaveHandler()
+        try {
+            const token = localStorage.getItem('token')
+
+            const { data } = await Axios.delete(`/api/favourite/?type=recruiment&token=${props.jobDetails.token}`,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                })
+
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <Card  sx={cardStyle}>
+        <Card sx={cardStyle}>
             <Grid container>
+                <Grid item xs={2}>
+                    {!saveRecruitment && <img src={nonSaveIc} alt='save-icon' onClick={() => { localStorage.getItem("token") !== null && saveHandler() }} />}
+                    {saveRecruitment && <img src={saveIc} alt='save-icon' onClick={() => { localStorage.getItem("token") !== null && unSaveHandler() }} />}
+                </Grid>
                 <Grid item xs={8}>
                     <Grid container justifyContent='end'>
                         <Grid item sx={requestDateStyle}>{jobDetail.date}</Grid>
@@ -94,12 +152,12 @@ const JobCard = (props: IProps) => {
                     </Grid>
                     <Grid container justifyContent='end'>
                         <Grid item sx={cityStyle}>{jobDetail.city}</Grid>
-                        <Grid item sx={{marginTop: '15px'}}><img src={cityIc}/></Grid>
+                        <Grid item sx={{ marginTop: '15px' }}><img src={cityIc} /></Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={2}>
                     <div className='company-logo'>
-                        <img src={jobDetail.logoSrc} className='company-logo__image'/>
+                        <img src={jobDetail.logoSrc} className='company-logo__image' />
                     </div>
                 </Grid>
 
