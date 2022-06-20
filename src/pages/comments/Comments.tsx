@@ -1,6 +1,7 @@
 import React from "react";
-import {FormControl, Grid, Stack} from "@mui/material";
+import { FormControl, Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const StyledInputElement = styled('input')`
   width: 224px;
@@ -49,7 +50,7 @@ const captchaStyle = {
     width: '90px',
     height: '30px',
     marginTop: '29px',
-    marginBottom:'45.4px',
+    marginBottom: '45.4px',
     fontFamily: 'SegoeUI',
     fontSize: '22px',
     fontWeight: 'normal',
@@ -61,19 +62,29 @@ const captchaStyle = {
     color: ' #33334c',
 }
 const Comments = () => {
+
+    function onChange(value: any) {
+        console.log("Captcha value:", value);
+    }
+
     return (
-        <Grid container sx={{backgroundColor: '#f8f8f8'}}>
+        <Grid container sx={{ backgroundColor: '#f8f8f8' }}>
             <Grid item xs={7} spacing={2}>
                 <Stack>
                     <FormControl>
-                        <StyledInputElement placeholder="نام" dir='rtl'/>
-                        <StyledInputElement placeholder="تلفن همراه" dir='rtl'/>
-                        <StyledTextareaElement placeholder="نظر شما"  dir='rtl'/>
+                        <StyledInputElement placeholder="نام" dir='rtl' />
+                        <StyledInputElement placeholder="تلفن همراه" dir='rtl' />
+                        <StyledTextareaElement placeholder="نظر شما" dir='rtl' />
                         <Grid container>
                             <Grid item xs={6} >
-                                <StyledCaptchaElement/>
+                                <StyledCaptchaElement />
                             </Grid>
-                            <Grid item xs={6} sx={captchaStyle}>captcha</Grid>
+                            <Grid item xs={6} sx={captchaStyle}>
+                                {/* <ReCAPTCHA
+                                    sitekey=""
+                                    onChange={onChange}
+                                /> */}
+                            </Grid>
                         </Grid>
                         <StyledButtonElement>ارسال نظر</StyledButtonElement>
                     </FormControl>
