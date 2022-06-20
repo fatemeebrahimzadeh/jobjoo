@@ -33,7 +33,7 @@ interface IProps {
 
 const navbarTitleStyle = {
     marginTop: '5px',
-    fontFamily: 'BYekan+',
+    // fontFamily: 'BYekan+',
     fontSize: '21px',
     fontWeight: 'bold',
     fontStretch: 'normal',
@@ -45,7 +45,7 @@ const navbarTitleStyle = {
 };
 
 const navbarContentStyle = {
-    fontFamily: 'BYekan+',
+    // fontFamily: 'BYekan+',
     fontSize: '16px',
     fontWeight: 'normal',
     fontStretch: 'normal',

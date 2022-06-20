@@ -25,8 +25,14 @@
         }
     }
 
-    .Navbar__logo {
-        width: 98.8px;
-        height: 40.2px;
+    .containerLogo {
+        width:20%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .Navbar__logo {
+            width: 98.8px;
+            height: 40.2px;
+        }
     }
 }

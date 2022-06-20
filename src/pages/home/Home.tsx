@@ -18,7 +18,6 @@ import { Card, Grid, Pagination } from "@mui/material";
 import JobCard from "../../components/jobCard/JobCard";
 import { Link } from "react-router-dom";
 import NavbarVertical, { IOption as IVerticalNavbarOption, IData as IVerticalNavbarData } from "../../components/navbarVertical/NavbarVertical";
-import { Button, ButtonGroup } from "@mui/material";
 
 let companyLogos: {
     img: string
@@ -292,17 +291,6 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                                 onChangeHandler={this.boxOnChangeHandler} />
                             <div className="companyLogos">
                                 {companyLogosImage}
-                            </div>
-                            <div className="contactUs">
-                                <ButtonGroup className="commentBtn" variant="text" aria-label="text button group">
-                                    <Button
-                                        size="medium"
-                                        color="primary">
-                                        <Link to="/comments" >
-                                            Contact Us
-                                        </Link>
-                                    </Button>
-                                </ButtonGroup>
                             </div>
                         </section>
                     </main>

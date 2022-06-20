@@ -6,6 +6,8 @@ import Navbar from "./components/navbar/Navbar"
 import { store } from './store/configureStore';
 import { syncsDatabase } from './utils/getDatabase';
 import Spinner from './components/UI/spinner/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IState {
   isLoading: boolean
@@ -37,6 +39,7 @@ class App extends Component<{}, IState> {
       <div className='App'>
         <Navbar />
         {this.state.isLoading ? <Spinner isLoading={this.state.isLoading} /> : <Router />}
+        <ToastContainer />
       </div >
     );
   }

@@ -18,6 +18,7 @@ const ReCaptchaComponent: FC<IProps> = (props) => {
         }
 
         const token = await executeRecaptcha('contact');
+        console.log(token)
         props.callBackReCaptcha(token)
         // Do whatever you want with the token
     }, [executeRecaptcha]);

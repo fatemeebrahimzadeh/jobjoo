@@ -121,9 +121,14 @@ const Navbar = () => {
                         color="primary"
                         onClick={openLoginModalHandler}>ورود</Button>
                 </ButtonGroup>
-                <Link to="/" className="Navbar__logo">
-                    <img src={logo} alt="logo" />
-                </Link>
+                <div className="containerLogo">
+                    <Link to="/comments" >
+                        ارتباط با ما
+                    </Link>
+                    <Link to="/" className="Navbar__logo">
+                        <img src={logo} alt="logo" />
+                    </Link>
+                </div>
             </nav>
             {modalInputLabel === "Phone Number" && <LoginModal
                 open={openModal}

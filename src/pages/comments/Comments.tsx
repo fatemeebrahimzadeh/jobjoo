@@ -66,27 +66,23 @@ const captchaStyle = {
 }
 const Comments = () => {
 
-    const [token, setToken] = React.useState("");
-    const [name, setName] = React.useState("");
-    const [phone, setPhone] = React.useState("");
-    const [content, setContent] = React.useState("");
+    const [token, setToken] = React.useState<string>("");
+    const [name, setName] = React.useState<string>("");
+    const [phone, setPhone] = React.useState<string>("");
+    const [content, setContent] = React.useState<string>("");
 
     const callBackReCaptcha = (token: string) => {
         setToken(token)
     }
 
     const commentOnClickHandler = async () => {
-        console.log(name, phone, content, token)
         let response = await Axios.post('/contact/', {
             name: name,
             phone: phone,
             content: content,
             recaptcha: token
         })
-        setToken("")
-        setName("")
-        setPhone("")
-        setContent("")
+        console.log(response)
     }
 
     return (
@@ -94,9 +90,9 @@ const Comments = () => {
             <Grid item xs={7} spacing={2}>
                 <Stack>
                     <FormControl>
-                        <StyledInputElement onChange={(event) => { setName(event.target.value) }} placeholder="نام" dir='rtl' />
-                        <StyledInputElement onChange={(event) => { setPhone(event.target.value) }} placeholder="تلفن همراه" dir='rtl' />
-                        <StyledTextareaElement onChange={(event) => { setContent(event.target.value) }} placeholder="نظر شما" dir='rtl' />
+                        <StyledInputElement onChange={(event) => { setName(event.target.value.toString()) }} placeholder="نام" dir='rtl' />
+                        <StyledInputElement onChange={(event) => { setPhone(event.target.value.toString()) }} placeholder="تلفن همراه" dir='rtl' />
+                        <StyledTextareaElement onChange={(event) => { setContent(event.target.value.toString()) }} placeholder="نظر شما" dir='rtl' />
                         <GoogleReCaptchaProvider reCaptchaKey="6Lda4HcgAAAAAP3jIMOqhM-3753uFza8FsK0NXAg">
                             <ReCaptchaComponent callBackReCaptcha={callBackReCaptcha} />
                         </GoogleReCaptchaProvider>
