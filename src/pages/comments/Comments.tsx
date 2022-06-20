@@ -1,7 +1,10 @@
 import React from "react";
 import { FormControl, Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCaptchaComponent from "./ReCaptchaComponent"
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import Intersection from "../../assets/img/Intersection 8.png"
+import { Axios } from "../../utils/axios";
 
 const StyledInputElement = styled('input')`
   width: 224px;
@@ -63,8 +66,27 @@ const captchaStyle = {
 }
 const Comments = () => {
 
-    function onChange(value: any) {
-        console.log("Captcha value:", value);
+    const [token, setToken] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [phone, setPhone] = React.useState("");
+    const [content, setContent] = React.useState("");
+
+    const callBackReCaptcha = (token: string) => {
+        setToken(token)
+    }
+
+    const commentOnClickHandler = async () => {
+        console.log(name, phone, content, token)
+        let response = await Axios.post('/contact/', {
+            name: name,
+            phone: phone,
+            content: content,
+            recaptcha: token
+        })
+        setToken("")
+        setName("")
+        setPhone("")
+        setContent("")
     }
 
     return (
@@ -72,28 +94,22 @@ const Comments = () => {
             <Grid item xs={7} spacing={2}>
                 <Stack>
                     <FormControl>
-                        <StyledInputElement placeholder="نام" dir='rtl' />
-                        <StyledInputElement placeholder="تلفن همراه" dir='rtl' />
-                        <StyledTextareaElement placeholder="نظر شما" dir='rtl' />
-                        <Grid container>
-                            <Grid item xs={6} >
-                                <StyledCaptchaElement />
-                            </Grid>
-                            <Grid item xs={6} sx={captchaStyle}>
-                                {/* <ReCAPTCHA
-                                    sitekey=""
-                                    onChange={onChange}
-                                /> */}
-                            </Grid>
-                        </Grid>
-                        <StyledButtonElement>ارسال نظر</StyledButtonElement>
+                        <StyledInputElement onChange={(event) => { setName(event.target.value) }} placeholder="نام" dir='rtl' />
+                        <StyledInputElement onChange={(event) => { setPhone(event.target.value) }} placeholder="تلفن همراه" dir='rtl' />
+                        <StyledTextareaElement onChange={(event) => { setContent(event.target.value) }} placeholder="نظر شما" dir='rtl' />
+                        <GoogleReCaptchaProvider reCaptchaKey="6Lda4HcgAAAAAP3jIMOqhM-3753uFza8FsK0NXAg">
+                            <ReCaptchaComponent callBackReCaptcha={callBackReCaptcha} />
+                        </GoogleReCaptchaProvider>
+                        <StyledButtonElement onClick={commentOnClickHandler}>ارسال نظر</StyledButtonElement>
                     </FormControl>
                 </Stack>
             </Grid>
             <Grid item xs={5} sx={{
                 width: '384px',
                 height: '530px'
-            }}>hh</Grid>
+            }}>
+                <img src={Intersection} alt="comment vector" />
+            </Grid>
         </Grid>
     )
 }

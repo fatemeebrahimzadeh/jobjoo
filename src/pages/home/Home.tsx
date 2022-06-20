@@ -18,6 +18,7 @@ import { Card, Grid, Pagination } from "@mui/material";
 import JobCard from "../../components/jobCard/JobCard";
 import { Link } from "react-router-dom";
 import NavbarVertical, { IOption as IVerticalNavbarOption, IData as IVerticalNavbarData } from "../../components/navbarVertical/NavbarVertical";
+import { Button, ButtonGroup } from "@mui/material";
 
 let companyLogos: {
     img: string
@@ -292,6 +293,17 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                             <div className="companyLogos">
                                 {companyLogosImage}
                             </div>
+                            <div className="contactUs">
+                                <ButtonGroup className="commentBtn" variant="text" aria-label="text button group">
+                                    <Button
+                                        size="medium"
+                                        color="primary">
+                                        <Link to="/comments" >
+                                            Contact Us
+                                        </Link>
+                                    </Button>
+                                </ButtonGroup>
+                            </div>
                         </section>
                     </main>
                 ) : (
@@ -314,7 +326,7 @@ class Home extends Component<IProps & ILinkStateToProps, IState> {
                             </Card>
                             {this.jobsList.map((job, i) =>
                                 <Link key={i} to="/recruitment" state={job} >
-                                        <JobCard key={i} jobDetails={job} />
+                                    <JobCard key={i} jobDetails={job} />
                                 </Link>)}
                             <Pagination sx={{ display: "flex", justifyContent: "center", margin: "10px" }}
                                 onChange={(event, page) => { this.searchOnClickHandler(page) }}
