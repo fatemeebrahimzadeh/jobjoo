@@ -7,6 +7,7 @@ import corporationIc from "../../assets/icons/ic-corpo.png";
 import cityIc from "../../assets/icons/ic-pin.png";
 import Time from "../UI/Time/Time";
 import { Axios } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 const cardStyle = {
     width: '100%',
@@ -104,42 +105,48 @@ const RecruitmentBrief = (props: IProps) => {
 
     const saveHandler = async () => {
         toggleSaveHandler()
-        try {
-            const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
 
-            const { data } = await Axios.post('/api/favourite/',
-                {
-                    type: "recruiment",
-                    token: props.token
-                },
-                {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
-
-            console.log(data)
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await Axios.post('/api/favourite/',
+            {
+                type: "recruiment",
+                token: props.token
+            },
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            })
+            .then(response => {
+                console.log(response.data)
+                toast(response.data.message)
+            })
+            .catch(error => {
+                console.log(error)
+                toast(error)
+            });
     }
 
     const unSaveHandler = async () => {
         toggleSaveHandler()
-        try {
-            const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
 
-            const { data } = await Axios.delete(`/api/favourite/?type=recruiment&token=${props.token}`,
-                {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
+        const response = await Axios.delete(`/api/favourite/?type=recruiment&token=${props.token}`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            })
 
-            console.log(data)
-        } catch (error) {
-            console.log(error)
-        }
+            .then(response => {
+                console.log(response.data)
+                toast(response.data.message)
+            })
+            .catch(error => {
+                console.log(error)
+                toast(error)
+            });
+
     }
 
     return (

@@ -11,6 +11,10 @@ body {
   font-family: "BYekan" !important;
 }
 
+/* a:visited {
+  color: #4166b7 ;
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

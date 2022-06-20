@@ -7,6 +7,7 @@ import LoginModal from "../loginModal/LoginModal";
 import { AxiosResponse } from "axios";
 import { Axios } from "../../utils/axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 // typescript
 // declare module '@mui/material/styles' {
 //     interface Theme {
@@ -78,16 +79,21 @@ const Navbar = () => {
     const sendCode = async () => {
         console.log(typeof PhoneNumber, PhoneNumber, typeof Code, Code)
         try {
-            let { data } = await Axios.post<any, AxiosResponse<{
-                token: string
-            }>>("/auth/login/", {
-                username: PhoneNumber,
-                password: Code
-            })
-            // console.log("data.token", data.token)
-            localStorage.setItem('token', data.token)
+            if (localStorage.getItem("token") !== null) toast("you are logged in")
+            else {
+                let { data } = await Axios.post<any, AxiosResponse<{
+                    token: string
+                }>>("/auth/login/", {
+                    username: PhoneNumber,
+                    password: Code
+                })
+                // console.log("data.token", data.token)
+                localStorage.setItem('token', data.token)
+                toast("logged in successfully")
+            }
         } catch (error) {
             console.log(error)
+            toast("error!")
         }
     }
 
@@ -111,7 +117,7 @@ const Navbar = () => {
                     <Button
                         size="medium"
                         color="primary">
-                        <Link to={`${localStorage.getItem("token") !== null ? "/profile" : "/"}`}>
+                        <Link to={`${localStorage.getItem("token") !== null ? "/profile" : "/"}`} onClick={() => { if (localStorage.getItem("token") === null) { toast("log in please!") } }}>
                             پروفایل
                         </Link>
                     </Button>
