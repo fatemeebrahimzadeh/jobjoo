@@ -86,7 +86,10 @@ const JobCard = (props: IProps) => {
         logoSrc: props.jobDetails.source?.logo
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7577d42d462b91d061c2105aa99eda487f4b9416
     const [saveRecruitment, setSaveRecruitment] = useState(false);
 
     useEffect(() => {
@@ -160,7 +163,6 @@ const JobCard = (props: IProps) => {
                         <img src={jobDetail.logoSrc} className='company-logo__image' />
                     </div>
                 </Grid>
-
             </Grid>
         </Card>
     );
